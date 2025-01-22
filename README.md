@@ -1,4 +1,5 @@
 # Clia
+![CliaLogo](https://github.com/user-attachments/assets/cb4a758b-be16-4c11-acb8-e6f5d83f6856)
 
 ## Table of Contents
 1. [Problem and Context](#problem-and-context)  
