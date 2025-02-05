@@ -46,33 +46,33 @@
 # Problem and Context
 
 ## 1.1 Background
-In the realm of **worldbuilding**—whether for novels, role-playing games, video games, or academic exercises—map creation is a central and often **time-consuming** task. While many tools exist for drawing fantasy maps (e.g., Wonderdraft, Inkarnate), they typically focus on **visual design** without accounting for **geological plausibility**. Meanwhile, **scientific-grade** programs, such as **GPlates**, are powerful for modeling real-world tectonic data but can be intimidating or cumbersome for creative users who want to craft entirely new planets.
+Worldbuilding is the act of creating fictional settings. It is most often used by writers, DMs, game makers and artists to ground the stories they create, but a lot of other projects can benefit for well crafted settings and some people (like me) just practice worldbuilding in itself for fun. 
+But worldbuilding is in itself an aglomeration of many other, more specific practices like conlanging (creating languages), neography (creating writing systems) or mapmaking (creating fictional maps) and many more.
+One pretty well known tricks that can be used to impart complexity, richess and a sens of belivablitly to any worldbuilding project is to make it's history. Instead of building the thing only at the state that matters to you, you create it at an arbitrary point in the past and artificially simulate it's evolution up until the point that interests you. This process is way more time consuming but also more complicated as you have to understand how things like languages, alphabets, ecosystems or geology evolve over time. 
+But for some worldbuilders this extra effort is worth it.
+For simulating the evolution of a lot of things, paper, motivation and a great amount of knowledge is enough. But when we talk about the evolution of the geography of a planet, it get's way more complicated as the finaly product is basically a small film of continents moving on a sphere (anybody that can make that with paper get's my undying respect).
+
+Making geological history of maps is still, even in the worldbuilding hobby, a pretty niche subject, despite the fact that geography is probably one of the lowest building block of any worldbuilding projects.
 
 ## 1.2 The Gap in Existing Tools
-- **GPlates**: A professional-level application for **real** plate tectonics. Extremely powerful but geared toward Earth’s data and workflows, making it too technical for many creative users.  
-- **Fantasy map tools** (Wonderdraft, Inkarnate): Great for artistic design, but lack any **geophysical realism** such as subduction zones or mountain-building from collisions.
+The main reason, in my opinion, that geological histories are sadly not as common in the worldbuilding community is because there curently is a gap in the existing available tools to do so :
 
-Hence, there is a **gap**: a **user-friendly** yet **technically grounded** application that helps **worldbuilders** generate maps with a **solid geological foundation**—complete with cratons, continental drift, collision events, subduction zones, etc.
+- **Fantasy map tools** (World Anvil, Wonderdraft, Inkarnate): These tools are mostly made for artistic design and story building. They can be very usefull to anotate maps or follow the progression in a story but they provide very few ways to animate the map, draw it directly on a sphere and absolutely no way to manipulate the geography of the map like real techtonic plates.
+- **Scientific software** (GPlates): This is a professional-level application for real plate tectonics. It is extremely powerful but geared toward Earth’s data and workflows. It might be too technical for most worldbuilders and it is not designed to handle fictional mapmaking. Using it in this way has its own quirks.
+
+I feel like there is a real need and a real opportunity for a tool geared towards fictional mapmaking that helps worldbuilder make scientifically grounded geographic histories without having to deal with the quirks and complexity of current scientific software and therefore help them make their setting more rich and more belivable.
 
 ## 1.3 Stakeholders and Their Objectives
-1. **Worldbuilders (Primary Users)**  
-   - **Objective**: Craft imaginary worlds with realistic tectonic motion and landforms.  
-   - **Challenge**: Must be able to **draw** and **animate** plates easily, without deep knowledge of real-world geophysics.
-
-2. **Geology Enthusiasts / Educators**  
-   - **Objective**: Demonstrate or teach plate tectonics in a more playful, interactive tool.  
-   - **Challenge**: Existing professional software can be overkill or too complex for introductory lessons.
-
-3. **Software / Game Developers**  
-   - **Objective**: Integrate realistic planet generation into their engines or interactive stories.  
-   - **Challenge**: Need an **exportable** system (meshes, images, data) that can plug into their pipelines.
-
-4. **The Student / Project Owner**  
-   - **Objective**: Deliver a final-year project (TFE) that addresses this unmet need, bridging **scientific** and **creative** requirements.  
-   - **Challenge**: Must demonstrate the capacity to analyze the context, plan the architecture, justify design choices, and produce a workable prototype.
+1. **Worldbuilders (Primary Users)**
+2. **Worldbuilding Pasta**
+3. **Artifexian**
+4. **Me / Project Owner**  
 
 ## 1.4 Key Challenges and Motivations
-- **Accessibility vs. Scientific Rigor**: Balancing a **user-friendly** interface with enough **realism** to produce valid geologic results.  
+- Balancing **Accessibility** and **Scientific rigor** : This project should be available and usable by the largest number of worldbuilder while still beeing a real help to making scientifically robust geologic history. Things like the UI and the workflow should not hinder the accuracy of the tool while still having a small learning curve and encouraging an iterative process and experimentation.
+- Balancing **Performance** and **Complexity** : The hardware of the user should not be a roadblock to them using the service, it should feel fast in order to not stop the creative process. At the same time, things like manipulation and colision checks of polygons on a sphere can be complexe and computationally heavy. Solutions have to be found in order to manage those two aspects of the project.
+
+
 - **Technical Complexity**: Handling **spherical geometry**, plate rotations, splitting/merging polygons, and time-based animation.  
 - **Performance**: Ensuring the application can run smoothly **in the browser**, even with large data sets or complex plate boundaries.  
 - **Data Management**: Storing multiple timelines, user-drawn plates, or collisions.  
