@@ -46,56 +46,56 @@
 # Problem and Context
 
 ## 1.1 Background
-Worldbuilding is the act of creating fictional settings. It is most often used by writers, DMs, game makers and artists to ground the stories they create, but a lot of other projects can benefit for well crafted settings and some people (like me) just practice worldbuilding in itself for fun. 
+Worldbuilding is the act of creating fictional settings. It is most often used by writers, DMs, game makers and artists to ground the stories they create, but a lot of other projects can benefit from well crafted settings and some people (like me) just practice worldbuilding in itself for fun. 
 But worldbuilding is in itself an aglomeration of many other, more specific practices like conlanging (creating languages), neography (creating writing systems) or mapmaking (creating fictional maps) and many more.
 One pretty well known tricks that can be used to impart complexity, richess and a sens of belivablitly to any worldbuilding project is to make it's history. Instead of building the thing only at the state that matters to you, you create it at an arbitrary point in the past and artificially simulate it's evolution up until the point that interests you. This process is way more time consuming but also more complicated as you have to understand how things like languages, alphabets, ecosystems or geology evolve over time. 
 But for some worldbuilders this extra effort is worth it.
 For simulating the evolution of a lot of things, paper, motivation and a great amount of knowledge is enough. But when we talk about the evolution of the geography of a planet, it get's way more complicated as the finaly product is basically a small film of continents moving on a sphere (anybody that can make that with paper get's my undying respect).
 
-Making geological history of maps is still, even in the worldbuilding hobby, a pretty niche subject, despite the fact that geography is probably one of the lowest building block of any worldbuilding projects.
+Making geological history of maps is still, even in the worldbuilding hobby, a pretty niche subject, despite the fact that geography is probably one of the highest building block of any worldbuilding projects.
 
 ## 1.2 The Gap in Existing Tools
 The main reason, in my opinion, that geological histories are sadly not as common in the worldbuilding community is because there curently is a gap in the existing available tools to do so :
 
-- **Fantasy map tools** (World Anvil, Wonderdraft, Inkarnate): These tools are mostly made for artistic design and story building. They can be very usefull to anotate maps or follow the progression in a story but they provide very few ways to animate the map, draw it directly on a sphere and absolutely no way to manipulate the geography of the map like real techtonic plates.
-- **Scientific software** (GPlates): This is a professional-level application for real plate tectonics. It is extremely powerful but geared toward Earth’s data and workflows. It might be too technical for most worldbuilders and it is not designed to handle fictional mapmaking. Using it in this way has its own quirks.
+- **Fantasy map tools** (World Anvil, Wonderdraft, Inkarnate):
+   These tools are mostly made for artistic design and story building. They can be very usefull to anotate maps or follow the progression in a story but they provide very few ways to animate the map, draw it directly on a sphere and absolutely no way to manipulate the geography of the map like real techtonic plates.
+- **Scientific software** (GPlates):
+   This is a professional-level application for real plate tectonics. It is extremely powerful but geared toward Earth’s data and workflows. It might be too technical for most worldbuilders and it is not designed to handle fictional mapmaking. Using it in this way has its own quirks.
 
 I feel like there is a real need and a real opportunity for a tool geared towards fictional mapmaking that helps worldbuilder make scientifically grounded geographic histories without having to deal with the quirks and complexity of current scientific software and therefore help them make their setting more rich and more belivable.
+This is this objective that this project is going to pursue.
 
-## 1.3 Stakeholders and Their Objectives
-1. **Worldbuilders (Primary Users)**
-2. **Worldbuilding Pasta**
-3. **Artifexian**
-4. **Me / Project Owner**  
+## 1.3 Project Overview
+Clia (from the contraction of *Clymene* and *Lapetus*, the parents of the titan Atlas) will be a web application that allows users that are not familiar with advanced scientific tooling to easily make geological histories of fictional maps.
 
-## 1.4 Key Challenges and Motivations
-- Balancing **Accessibility** and **Scientific rigor** : This project should be available and usable by the largest number of worldbuilder while still beeing a real help to making scientifically robust geologic history. Things like the UI and the workflow should not hinder the accuracy of the tool while still having a small learning curve and encouraging an iterative process and experimentation.
-- Balancing **Performance** and **Complexity** : The hardware of the user should not be a roadblock to them using the service, it should feel fast in order to not stop the creative process. At the same time, things like manipulation and colision checks of polygons on a sphere can be complexe and computationally heavy. Solutions have to be found in order to manage those two aspects of the project.
-
-
-- **Technical Complexity**: Handling **spherical geometry**, plate rotations, splitting/merging polygons, and time-based animation.  
-- **Performance**: Ensuring the application can run smoothly **in the browser**, even with large data sets or complex plate boundaries.  
-- **Data Management**: Storing multiple timelines, user-drawn plates, or collisions.  
-- **User Engagement**: Making the system **intuitive**, encouraging iterative drawing and experimentation with minimal learning curve.
-
-## 1.5 Project Rationale
-The **lack of a specialized tool** for **imaginative geologic modeling** presents a unique opportunity to:
+The **lack of a specialized tool** for **fictional geologic history animation** presents an opportunity to:
 - **Simplify** advanced scientific tools (like GPlates) into a **streamlined** web app suited for non-experts.  
-- Provide an **educational bridge** between fantasy creation and real science, **enriching** fictional settings while maintaining internal consistency.  
-- Demonstrate strong **engineering skills** in both **software architecture** (Django, HTMX, Rust→WASM) and **geometric computations** (plate tectonics on a sphere).
-
-By designing and implementing this tool, we aim to **empower creators** to produce **scientifically plausible** worlds, benefiting both academic and creative communities.
+- Provide an **educational bridge** between fantasy creation and real science, helping worldbduilders **enriching** their fictional settings
+- Explore new and exciting technologies to solve technical challenges, be it in methematics and geometry or in user interaction.
 
 ---
 
 # Identification of Major Agents
 
-## 2.1 Potential Clients and Their Roles
+## 2.0 Overview of main agents
+1. **Users** :
+      **Worldbuilders**:
+         Worldbuilders are simply people that want to create worlds, for any reason. They are the main target for this tool and while the worldbuilding community is quite large, making geological history is still a niche topic. This is why this project has to cater to both the casual worldbuilder that want to try their hand at geologic histories and the hardcore user who want to explore alternatives to GPlates.
+      **Educators**:
+         While this application is mainly targetted at worldbuilders, the opportunity of having an easy to use tool to represent techtonic interaction can be really usefull for anybody wanting to teach the basics of techtonic principles.
+2. **Worldbuilding Pasta**:
+   Worldbuilding Pasta is the name of a blog focused on scientifically acurate worldbuilding. This blog is by far the best ressource on the use of GPlates as a tool for fantasy geological history making [Making an apple pie from scratch V](https://worldbuildingpasta.blogspot.com/2020/06/an-apple-pie-from-scratch-part-v.html). The writer of the blog has been contacted and has expressed interest in the project but is currently waiting for the project to be better defined in order to decide if they want to involve themselves in the project. Their input on this project could be an amazing asset and they will be recontacted as the project develop in order to keep them informed.
+3. **Artifexian**:
+   Artifexian is a worldbuilding youtuber that has made a video serie based on Worldbuilding Pasta's blog. They have been contacted a year ago when this project was in its infancy and they expressed interest in it. I have try to recontact him to no avail but I will try to do so again as the project develops. The experience of Artifexian on worldbuilding could be really helpfull and this project could possibly also benefit from the exposure to his community.
+4. **Me / Project Owner**  
+   Since I have failed to convince the interested parties in taking the role of clients for this project, this role will have to be filled by myself for the time beeing. I nonetheless consider myself to be a worldbuilder and this project is one that is truely near and dear to my heart and I am not unhappy to keep ownership over it. Furthermore, the real client, in the end, is the worldbuilding community.
 
-| **Potential Client**        | **Background**                                                       | **Interest & Status**                                                                                                             |
-|-----------------------------|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| **Artifexian (YouTuber)**   | Produces worldbuilding, cartography, and conlang videos              | Showed interest in a fictional plate-tectonics tool but currently inactive. Might become a “client” once a working prototype exists |
-| **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding (tectonics, GPlates tips)  | Enthusiastic but wants more details. May serve as an expert consultant or user validating scientific credibility once the scope is clearer |
+## 2.1 Potential Clients and Their Roles
+| **Potential Client**  | **Background** | **Interest & Status** | **Role** |
+|:--------------|:----------------------|:------------|---|
+| **Artifexian (YouTuber)**   | Produces worldbuilding, cartography, and conlang videos| Showed interest in the project | None currently but might act as an expert or help expose the project to a wider audience
+| **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding  | Enthusiastic but wants more details.| None currently but might act as an expert once the project becomes more precise |
+| **Me**| Student at Ephec with an interest in web developement| Amateur worldbuilder | current owner of the project|
 
 **The Student (Me) – Actual Client for Now**  
 - Acts as both **developer** and **client**, shaping the project to meet academic and personal expectations.  
@@ -432,6 +432,11 @@ A **custom** application merges **intuitive map creation** with **authentic tect
 ---
 
 # Technical Analysis
+
+## 6.0 Key Challenges and objectives
+- Balancing **Accessibility** and **Scientific accuracy** : This project should be available and usable by the largest number of worldbuilder while still beeing a real help to making scientifically robust geologic history. Things like the UI and the workflow should not hinder the accuracy of the tool while still having a small learning curve and encouraging an iterative process and experimentation.
+- Balancing **Performance** and **Complexity** : The hardware of the user should not be a roadblock to them using the service, it should feel fast in order to not stop the creative process. At the same time, things like manipulation and colision checks of polygons on a sphere can be complexe and computationally heavy. Solutions have to be found in order to manage those two aspects of the project.
+- Focusing on what is important : The premice of this project is quite complexe, therefore an effort should be made in order to avoid unnecessary complexity where it is possible.
 
 ## 6.1 High-Level Architecture Overview
 We need a browser-based solution that:
