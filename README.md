@@ -77,7 +77,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 # Identification of Major Agents
 
-## 2.0 Overview of main agents
+## 2.1 Overview of main agents
 1. **Users** :
       **Worldbuilders**:
          Worldbuilders are simply people that want to create worlds, for any reason. They are the main target for this tool and while the worldbuilding community is quite large, making geological history is still a niche topic. This is why this project has to cater to both the casual worldbuilder that want to try their hand at geologic histories and the hardcore user who want to explore alternatives to GPlates.
@@ -90,45 +90,98 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 4. **Me / Project Owner**  
    Since I have failed to convince the interested parties in taking the role of clients for this project, this role will have to be filled by myself for the time beeing. I nonetheless consider myself to be a worldbuilder and this project is one that is truely near and dear to my heart and I am not unhappy to keep ownership over it. Furthermore, the real client, in the end, is the worldbuilding community.
 
-## 2.1 Potential Clients and Their Roles
-| **Potential Client**  | **Background** | **Interest & Status** | **Role** |
+## 2.2 Potential Clients and Their Roles
+| **Agent**  | **Background** | **Interest & Status** | **Role** |
 |:--------------|:----------------------|:------------|---|
-| **Artifexian (YouTuber)**   | Produces worldbuilding, cartography, and conlang videos| Showed interest in the project | None currently but might act as an expert or help expose the project to a wider audience
-| **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding  | Enthusiastic but wants more details.| None currently but might act as an expert once the project becomes more precise |
-| **Me**| Student at Ephec with an interest in web developement| Amateur worldbuilder | current owner of the project|
-
-**The Student (Me) – Actual Client for Now**  
-- Acts as both **developer** and **client**, shaping the project to meet academic and personal expectations.  
-- Aims to create a proof of concept that can eventually incorporate external stakeholder feedback.
-
-## 2.2 Tutors and Academic Support
-
-1. **School’s Math Teacher (Tutor)**  
-   - **Expertise**: Advanced mathematics (geometry, spherical trigonometry).  
-   - **Role**: Ensures **mathematical correctness** (Euler rotations, polygon intersections).  
-   - **Impact**: Guides formula verification and numeric stability.
-
-2. **School’s Web Developer Teacher (Tutor)**  
-   - **Expertise**: Full-stack web dev (Django, WebAssembly, front-end best practices).  
-   - **Role**: Advises on architecture, performance, and security.  
-   - **Impact**: Aligns project with modern web standards and helps debug server/WASM integration issues.
+| **Artifexian**   | Produces worldbuilding, cartography, and conlang videos on Youtube | Showed interest in the project | None currently but might act as an expert or help expose the project to a wider audience|
+| **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding and specialist in the use of GPlates for fictional geologic history | Enthusiastic but wants more details before involving themselves more in the project.| None currently but might act as an expert once the project becomes more precise |
+| **Me**| Student at Ephec with an interest in web developement| Amateur worldbuilder | current developer and owner of the project, will act as main client for the time beeing |
+| **The worldbuilding community** (target users)| Anybody that has interest in worldbuilding | the few contacts I had with members of the community were positive, The project will have to be in a more advanced state before expositing it to the broader community | the project purpose is to be shared and used by as many people as possible, but setting ways of involving the community in the feedback process (discord server) is prematured |
 
 ## 2.3 Broader User Community (Future End Users)
 - **Worldbuilding Enthusiasts** (writers, RPG GMs)  
 - **Educators / Students** learning plate tectonics.  
 - **Indie Game Developers** needing realistic planet data.
 
-## 2.4 Stakes and Functional Impact
-- **Project Viability**: My progress will determine if external contributors (Artifexian, WorldbuildingPasta) become more involved.  
-- **Quality of Features**: Tutors influence mathematical accuracy and usability.  
-- **Scientific Credibility**: Approval from known worldbuilders could enhance the tool’s reputation.  
-- **Timeline**: Must balance external feedback with final-year academic milestones.
-
 ---
 
 # Identification of Functionalities
 
-Below are the **key features** needed to replicate (and improve upon) GPlates-like functionality, framed as **user stories** with acceptance criteria.
+- Improvement over GPlates
+   - not having to create collections
+   - not having to save manually each collection
+   - not having to manage IDs
+   - not having to manually clone and modify plate once split happens
+   - not having to specify start time and end time for every feature
+   - not having to maintain the rotation.rot file
+   - not having to manually manage flowlines, mid ocean ridges and newly created ocean crust
+   - Informing the user of where features should go based on their decisions (subduction zones, island arcs, orogenies)
+   - automatically delete subducted features
+- supercontinent
+   - making a new craton
+      - get geometric info of the cratons
+   - add continental crust arround the cratons
+      - get information about continental coverage
+- breaking apart
+   - creating a failed rift
+      -reactivating
+         - extend reactivated failed rift
+         - add new failed rift along a reactivated rift
+         - split features like island arcs or subduction zones
+      -detect inside what techtonic plate the failed rift is in order to move in acordance with it
+   - creating a continental rift to split continental crust
+      - start time
+   - automatically split a plate into multiple based on a continental rift
+- colliding
+   - detect if after plates have moved a collision has occured
+      - in the case of subduction of island arc highlight the location of accreted terrain : (length of the IA (km) x age of IA (in Mya))/2 in km^2
+      - in the case of continental collision :
+         - create a collision rift
+         - keep in memory the continental features that have been subducted (keeping track of things like fossils)
+- moving
+   - select a techtonic plate to move
+   - choose a speed (informed by the type of movement : Subductin Ocean, Recent Subduction Collision, Active Margin Continent, Passive Margin Continent
+   - set a direction for the plave to move in
+   - apply a rotation to the moving continent
+   - Ocean stuff
+      - display flowlines as well as the mid ocean ridge
+      - automatically create newly made oceanic crust (newly made oceanic crust should move in sinc with the corresponding plate)
+         - remember the age of the ocean crust
+   - Subduction zones
+      - create a new subduction zone
+      - indicate location of where subduction zones should be located based on the movement of the plate
+      - ensure that the subduction zone moves in sinc with the corresponding plate
+      - extend subduction zones based on the evolution of the movement of plates
+      - volcanic island arcs
+         - indicate where island arcs should go based on the subduction zone
+         - draw island arcs (informed by the age of the island arc)
+- geographic features
+   - based on the movement of plates, add different types of orogenies (andean, oural, himalayan, laramide)
+      - keep track of the age of former orogenies
+   - add large ignious provinces
+      -kep track of active/former ignious provinces
+   - add hotspots
+      -tracks the motion of the plate over the hotspot to correctly place a trail
+- tools
+   - measuring tool for widths or areas of features
+   - age tool to get the age of features or the time since they've been active
+- optional
+   - dynamically carve into the oceanic shelve to archieve a rough outline of the actual land masses
+   - add additional/substrative vectorial brushes to help refine the coastlines of the landmasses
+   - interactive topology setting
+   - automatic feature detailing (fractals ?)
+- data
+   - land percentage coverage for the entire globe
+- project settings
+   - set globe size
+   - set planet gravitational constat
+- app settings
+   - change between the 3D view of the glob and different types of projections
+      - change the rotation of the globe inside projections
+   - define the color of different elements (different for fill and for outline)
+   - add overlay to the globe for users that want to work based on a target map
+   - enable heatmaps for features where age is important
+   - export the project of part of it either as static pngs or svgs or as videos or gifs
 
 ## 3.1 Basics
 
@@ -149,15 +202,6 @@ Below are the **key features** needed to replicate (and improve upon) GPlates-li
 - A slider or numeric field to jump to specific times.  
 - Globe updates to show plate positions (once plates exist).
 
-### Creating Initial Continents (Supercontinent)
-> “As a user, I want to create polygonal features on the globe so I can define my initial supercontinent layout.”
-
-**Acceptance Criteria**:  
-- Draw polygons (click to place vertices).  
-- Each polygon has a feature type (e.g., Craton, ContinentalCrust) and unique Plate ID.  
-- Color-coded by Plate ID; editable vertices.  
-- Stored in the project.
-
 ### Saving the Project
 > “As a user, I want to save my current project data so I can reopen it later.”
 
@@ -168,6 +212,15 @@ Below are the **key features** needed to replicate (and improve upon) GPlates-li
 ---
 
 ## 3.2 Making & Moving Plates
+
+### Creating Initial Continents (Supercontinent)
+> “As a user, I want to create polygonal features on the globe so I can define my initial supercontinent layout.”
+
+**Acceptance Criteria**:  
+- Draw polygons (click to place vertices).  
+- Each polygon has a feature type (e.g., Craton, ContinentalCrust) and unique Plate ID.  
+- Color-coded by Plate ID; editable vertices.  
+- Stored in the project.
 
 ### Defining Rifts
 > “As a user, I want to draw a rift line across a continent so it can split into two separate plates.”
