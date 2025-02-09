@@ -100,115 +100,6 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 ---
 
-# Identification of Functionalities
-
-- supercontinent
-   - making a new craton
-      - get geometric info of the cratons
-   - add continental crust arround the cratons
-      - get information about continental coverage
-- breaking apart
-   - creating a failed rift
-      -reactivating
-         - extend reactivated failed rift
-         - add new failed rift along a reactivated rift
-         - split features like island arcs or subduction zones
-      -detect inside what techtonic plate the failed rift is in order to move in acordance with it
-   - creating a continental rift to split continental crust
-      - start time
-   - automatically split a plate into multiple based on a continental rift
-- colliding
-   - detect if after plates have moved a collision has occured
-      - in the case of subduction of island arc highlight the location of accreted terrain : (length of the IA (km) x age of IA (in Mya))/2 in km^2
-      - in the case of continental collision :
-         - create a collision rift
-         - keep in memory the continental features that have been subducted (keeping track of things like fossils)
-- moving
-   - select a techtonic plate to move
-   - choose a speed (informed by the type of movement : Subductin Ocean, Recent Subduction Collision, Active Margin Continent, Passive Margin Continent
-   - set a direction for the plave to move in
-   - apply a rotation to the moving continent
-   - Ocean stuff
-      - display flowlines as well as the mid ocean ridge
-      - automatically create newly made oceanic crust (newly made oceanic crust should move in sinc with the corresponding plate)
-         - remember the age of the ocean crust
-   - Subduction zones
-      - create a new subduction zone
-      - indicate location of where subduction zones should be located based on the movement of the plate
-      - ensure that the subduction zone moves in sinc with the corresponding plate
-      - extend subduction zones based on the evolution of the movement of plates
-      - volcanic island arcs
-         - indicate where island arcs should go based on the subduction zone
-         - draw island arcs (informed by the age of the island arc)
-- geographic features
-   - based on the movement of plates, add different types of orogenies (andean, oural, himalayan, laramide)
-      - keep track of the age of former orogenies
-   - add large ignious provinces
-      -kep track of active/former ignious provinces
-   - add hotspots
-      -tracks the motion of the plate over the hotspot to correctly place a trail
-- tools
-   - measuring tool for widths or areas of features
-   - age tool to get the age of features or the time since they've been active
-- optional
-   - dynamically carve into the oceanic shelve to archieve a rough outline of the actual land masses
-   - add additional/substrative vectorial brushes to help refine the coastlines of the landmasses
-   - interactive topology setting
-   - automatic feature detailing (fractals ?)
-- data
-   - land percentage coverage for the entire globe
-- project settings
-   - set globe size
-   - set planet gravitational constat
-- app settings
-   - change between the 3D view of the glob and different types of projections
-      - change the rotation of the globe inside projections
-   - define the color of different elements (different for fill and for outline)
-   - add overlay to the globe for users that want to work based on a target map
-   - enable heatmaps for features where age is important
-   - export the project of part of it either as static pngs or svgs or as videos or gifs
-
----
-
-- colliding
-   - detect if after plates have moved a collision has occured
-      - in the case of subduction of island arc highlight the location of accreted terrain : (length of the IA (km) x age of IA (in Mya))/2 in km^2
-      - in the case of continental collision :
-         - create a collision rift
-         - keep in memory the continental features that have been subducted (keeping track of things like fossils)
-- moving
-   - select a techtonic plate to move
-   - choose a speed (informed by the type of movement : Subductin Ocean, Recent Subduction Collision, Active Margin Continent, Passive Margin Continent
-   - apply a rotation to the moving continent
-   - Subduction zones
-      - indicate location of where subduction zones should be located based on the movement of the plate
-      - ensure that the subduction zone moves in sinc with the corresponding plate
-      - extend subduction zones based on the evolution of the movement of plates
-      - volcanic island arcs
-         - indicate where island arcs should go based on the subduction zone
-         - draw island arcs (informed by the age of the island arc)
-- geographic features
-   - based on the movement of plates, add different types of orogenies (andean, oural, himalayan, laramide)
-      - keep track of the age of former orogenies
-   - add large ignious provinces
-      -kep track of active/former ignious provinces
-   - add hotspots
-      -tracks the motion of the plate over the hotspot to correctly place a trail
-- tools
-   - measuring tool for widths or areas of features
-   - age tool to get the age of features or the time since they've been active
-- optional
-   - dynamically carve into the oceanic shelve to archieve a rough outline of the actual land masses
-   - add additional/substrative vectorial brushes to help refine the coastlines of the landmasses
-   - interactive topology setting
-   - automatic feature detailing (fractals ?)
-- project settings
-   - set globe size
-   - set planet gravitational constat
-- app settings
-   - change between the 3D view of the glob and different types of projections
-      - change the rotation of the globe inside projections
-
 ## 3.1 Basics
 
 ### User account management
@@ -221,6 +112,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] Modify account informations
 - [ ] Recover account
 
+**Importance**: Must have
+**Complexity**:very low
+
 ### Startup & Project Creation
 > “As a user, I want to initialize a new tectonic project so I can begin designing a planet’s geologic timeline from scratch.”
 
@@ -230,6 +124,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
    - [ ] Set various project settings (gravitational constant, planet radius)
 - [ ] Display the blank default globe to start working
 
+**Importance**:Critical
+**Complexity**:Low
+
 ### Saving the Project
 > “As a user, I want to save my current project data so I can reopen it later.”
 
@@ -238,6 +135,10 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] If the project already exists, update its state
 - [ ] Create a new entry in the database if the project is new
 
+
+**Importance**: Should have
+**Complexity**: Low
+
 ### Load Project
 > “As a user, I want to be able to open one of my saved projects"
 
@@ -245,23 +146,44 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] A ‘Load project’ action to open an existing project
 - [ ] Displays a list of the user's current projects
 
+**Importance**: Should have
+**Complexity**: Low
+
 ---
 ## 3.2 Drawing on the sphere
 
 ### Node by node drawing
 > "As a user, I want to be able to put down a series of nodes that gets connected into a polygon"
 
+**Importance**: Critical
+**Complexity**: Medium
+
 ### Node by node editing
-> "As a user, I want to be able to displace or delete existing nodes in order to change the shape of a feature"
+> "As a user, I want to be able to displace or delete existing nodes and add a node between two existing nodes in order to change the shape of a feature"
+
+**Importance**: Critical
+**Complexity**: Medium
 
 ### Logic feature editing
 > "As a user, I want to be able to edit a feature by drawing an other feature and applying a logical opperation between the two (additive, substrative, ...)"
 
+**Importance**: Should have
+**Complexity**: Medium-high
+
 ### Pencil drawing
 > "As a user, I want to be able to draw a line on the globe and have it automatically convert in a serie of points"
 
+**Importance**: Good to have
+**Complexity**: Medium
+
 ---
-## 3.3 Project and feature data
+## 3.3 Project, feature data and tools
+
+### Measuring tool
+> "As a user, I want to have access to a tool that allows me to measure the distance between two points"
+
+**Acceptance Criteria**
+- [ ] the measuring tool can be used to acurately measure distances on the sphere
 
 ### Project data
 > "As a user, I want to be able to track multiple informations about the world"
@@ -327,10 +249,10 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] the two split plates are considered as two and move independently
 uu
 ### Making the plates drift
-> "As a user, I want to define a direction and a speed in order to make a plate drift over a set period of time"
+> "As a user, I want to define a direction, rotation and a speed in order to make a plate drift over a set period of time"
 
 **Acceptance Criteria**:
-- [ ] inputing a speed, a direction and a length of time correctly displaces the plate
+- [ ] inputing a speed, a rotation, a direction and a length of time to correctly displaces the plate
 - [ ] every features that are associated to the plate move in sinc with the plate
 
 ### Adding Ocean Crust
@@ -347,63 +269,90 @@ uu
 **Acceptance Criteria**:  
 - [ ] I can draw a polyline that is considered as a subduction zone
 
+### Subduction of oceanic crust and other features
+> "As a user, I want to see features like the oceanic crust disapear as they get subducted"
+
+**Acceptance Criteria**:
+- hen a feature that would not create collisions (oceanic plates, mid ocean rifts ...) crosses a subduction zone, it's geomtry get's updated in order to give the impression that it "dissapears" under the subduction zone
 
 ---
-## 3.5 Plate collision
+## 3.5 Colliding
+### Collision detection
+> "As a user, I want to be notified when major features collide (mainly island arcs and plates)"
 
-### Subducting Ocean Crust & Collisions
-> “As a user, I want to mark where older ocean crust subducts or where plates collide.”
+**Acceptance Criteria**:
+- [ ] the application correctly notifies the user when a collision happens
+- [ ] the time of the collision is recorded
+- [ ] the animation creates a step at the time of the collision
 
-**Acceptance Criteria**:  
-- New subduction lines in the ocean.  
-- Retire polygons once fully subducted.  
-- Collisions cause overlapping polygons to be merged or adjusted.
+### Small collision management
+> "As a user, when a minor collision occurs (island arc vs plate), i want the island arc to automatically be added as "accreted terrain" to the plate"
 
-### Splitting Plates After Collision
-> “As a user, I want to form new rifts along old collision sutures.”
+**Acceptance Criteria**:
+- [ ] the island arc turns into accreted terrain
+- [ ] the new accreted terrain is added as a feature of the colliding plate
+- [ ] the surface of the accreted terrain correspond to the expected surface of the island arc at the time of collision
 
-**Acceptance Criteria**:  
-- Rifts drawn along collision lines.  
-- Polygons are partially split.  
-- Rotation data updated for new plate motion.
+### Major collision management
+>"As a user, when a major collision occurs (plate vs plate), i want to be able to keep track of the features the "disapear in this collision" as well as manage the various deformations of geometry that occurs in the collision."
 
----
-## 3.6 Marking Resulting Features
-
-### Orogenies (Mountain Belts)
-> “As a user, I want to place orogenies (mountain belts) along convergent boundaries.”
-
-**Acceptance Criteria**:  
-- User selects subduction/collision boundary.  
-- The system records start time for the orogeny.  
-- Orogenies can become “former” after a set time.
-
-### Large Igneous Provinces (LIPs)
-> “As a user, I want to mark brief episodes of large igneous outpourings.”
-
-**Acceptance Criteria**:  
-- Create a polygon labeled “LargeIgneousProvince.”  
-- Defined start/end times.  
-- Marked as “former LIP” once ended.
-
-### Hotspots & Island Chains
-> “As a user, I want stationary hotspots under the crust to generate volcanic island chains.”
-
-**Acceptance Criteria**:  
-- Place a hotspot point (lat/long).  
-- A motion path forms as plates drift over the hotspot.  
-- Island polygons can be placed at each timestep along this path.
-
-### Mid-Ocean Ridges & Plate Topologies
-> “As a user, I want to mark mid-ocean ridges and auto-generate a closed plate boundary.”
-
-**Acceptance Criteria**:  
-- Define a “MidOceanRidge” polyline.  
-- The system builds/updates a plate topology from rifts, subduction zones, ridges.  
-- Boundaries evolve as user changes plate configurations.
+**Acceptance Criteria**:
+- [ ] the features caugh in the collision are remembered (for things like tracking fossils)
+- [ ] a zone of orogenie is suggested 
+- [ ] the user can define a collision rift between the two colliding plates
+- [ ] the user can modify the geometry of the newly formed plate
 
 ---
-## 3.7 Options and export
+## 3.6 Feature indications
+
+### Island Arcs indication
+>"As a user, I want to be able to see the expected location and size of island arcs as oceanic crust get subducted"
+
+**Acceptance Criteria**:
+- [ ] a zone is correctly displayed behind a subduction zone to indicate the location of expected island arcs
+- [ ] with the simulation the area of the zone (in km^2) correctly evolves based on the formula : length of the IA (km) x age of IA (in Mya))/2
+
+### Hotspot placement and trail indication
+> "As a user, I want to be able to place hotspots on the globe and to see the zone of the expected trails of the volcanic activity"
+
+**Acceptance Criteria**:
+- [ ] I can correctly see the path of volcanic activity left by the hotspot
+- [ ] The expected location of remaining geologic traces of the hotspot are indicated with a sort of "teardrop" shape
+
+### Large ignious provinces
+> "As a user, I want to be able to draw a large ignious province and choose if the province is active or inactive"
+
+**Acceptance Criteria**:
+- [ ] have access to a large ignious province tool
+- [ ] the large ignious province can be set as active or inactive
+- [ ] the age of the ignious province is remembered
+
+### Orogenies indications
+> "As a user, I want to be informed of the expected locations of the various orogenies of the plates based on their movements"
+
+**Acceptance Criteria**:
+- [ ] locations of expected orogenies are dispayed on the plates
+- [ ] active/passive state of the orogenies can be set
+- [ ] the age of the orogenies is kept track of as well as the time since the orogenie was active
+
+## 3.7 Static tools
+those are options that are not relevant in the actual simulation process but allows the user to polish a specific state of the map.
+
+### automatic oceanic shelf carving
+> "As a user, I want to have an option to autmatically carve the appropriate depth into the oceanic shelf in order to have a more accurate picture of the actual landmasses
+
+### dynamic feature detailing
+> "As a user, I want to be able to easilly detail the features of my project"
+
+### dynamic topology generation
+> "As a user, I want the application to be able to give me a rough idea of the topology of the continents and the ocean 
+
+### Expanded topologic tools
+> "As a user, I want to be able to draw the topology of my map directly on the sphere with a set of vector tools"
+
+
+---
+## 3.8 Options and export
 
 ### switch between 3D and projection
 > "As a user, I want to be able to switch my view between the 3D view of the globe and a projection, as well as change the origin point of the projection"
@@ -451,16 +400,14 @@ uu
 # Methodology, Organization of the Project
 
 ## 4.1 Minimum Viable Product (MVP)
-This **MVP** ensures that all major layers (Django, HTMX, Rust→WASM, Three.js) function together:
 
 1. **3D Globe Visualization**  
-   - Basic globe in Three.js (orbit, zoom).  
-   - Minimal visual theme.
+   - Basic globe in Three.js
 
-2. **Polygon Drawing & Storage**  
-   - Draw polygonal features on the globe.  
-   - Store data (coords, plate ID) in Django.  
-   - Basic create/delete operations.
+2. **Polygon and Polyline Drawing & Storage**  
+   - Draw polygonal features on the globe in a "node by node" fashion.  
+   - Store data
+   - edit a created poligon by adding, deleting
 
 3. **Translation & Rotation of Polygons**  
    - Select a polygon to **translate** or **rotate** on the globe.  
