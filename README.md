@@ -93,30 +93,15 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 ## 2.2 Potential Clients and Their Roles
 | **Agent**  | **Background** | **Interest & Status** | **Role** |
 |:--------------|:----------------------|:------------|---|
-| **Artifexian**   | Produces worldbuilding, cartography, and conlang videos on Youtube | Showed interest in the project | None currently but might act as an expert or help expose the project to a wider audience|
-| **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding and specialist in the use of GPlates for fictional geologic history | Enthusiastic but wants more details before involving themselves more in the project.| None currently but might act as an expert once the project becomes more precise |
+| **Artifexian**   | Produces worldbuilding, cartography, and conlang videos on Youtube | Showed interest in the project a year ago, but has not been reachable since the project has started | None currently but might act as an expert or help expose the project to a wider audience. Furethermore, the Worldbuilder's log video serie is used as one of the main ressources for the worldbuilding/geologic side of the app|
+| **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding and specialist in the use of GPlates for fictional geologic history | Enthusiastic but wants more details before involving themselves more in the project.| None currently but might act as an expert once the project becomes more defined, the Worldbuilding Pasta blog is a really important inspiration for this project.|
 | **Me**| Student at Ephec with an interest in web developement| Amateur worldbuilder | current developer and owner of the project, will act as main client for the time beeing |
 | **The worldbuilding community** (target users)| Anybody that has interest in worldbuilding | the few contacts I had with members of the community were positive, The project will have to be in a more advanced state before expositing it to the broader community | the project purpose is to be shared and used by as many people as possible, but setting ways of involving the community in the feedback process (discord server) is prematured |
-
-## 2.3 Broader User Community (Future End Users)
-- **Worldbuilding Enthusiasts** (writers, RPG GMs)  
-- **Educators / Students** learning plate tectonics.  
-- **Indie Game Developers** needing realistic planet data.
 
 ---
 
 # Identification of Functionalities
 
-- Improvement over GPlates
-   - not having to create collections
-   - not having to save manually each collection
-   - not having to manage IDs
-   - not having to manually clone and modify plate once split happens
-   - not having to specify start time and end time for every feature
-   - not having to maintain the rotation.rot file
-   - not having to manually manage flowlines, mid ocean ridges and newly created ocean crust
-   - Informing the user of where features should go based on their decisions (subduction zones, island arcs, orogenies)
-   - automatically delete subducted features
 - supercontinent
    - making a new craton
       - get geometric info of the cratons
@@ -183,125 +168,188 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
    - enable heatmaps for features where age is important
    - export the project of part of it either as static pngs or svgs or as videos or gifs
 
+---
+
+- colliding
+   - detect if after plates have moved a collision has occured
+      - in the case of subduction of island arc highlight the location of accreted terrain : (length of the IA (km) x age of IA (in Mya))/2 in km^2
+      - in the case of continental collision :
+         - create a collision rift
+         - keep in memory the continental features that have been subducted (keeping track of things like fossils)
+- moving
+   - select a techtonic plate to move
+   - choose a speed (informed by the type of movement : Subductin Ocean, Recent Subduction Collision, Active Margin Continent, Passive Margin Continent
+   - apply a rotation to the moving continent
+   - Subduction zones
+      - indicate location of where subduction zones should be located based on the movement of the plate
+      - ensure that the subduction zone moves in sinc with the corresponding plate
+      - extend subduction zones based on the evolution of the movement of plates
+      - volcanic island arcs
+         - indicate where island arcs should go based on the subduction zone
+         - draw island arcs (informed by the age of the island arc)
+- geographic features
+   - based on the movement of plates, add different types of orogenies (andean, oural, himalayan, laramide)
+      - keep track of the age of former orogenies
+   - add large ignious provinces
+      -kep track of active/former ignious provinces
+   - add hotspots
+      -tracks the motion of the plate over the hotspot to correctly place a trail
+- tools
+   - measuring tool for widths or areas of features
+   - age tool to get the age of features or the time since they've been active
+- optional
+   - dynamically carve into the oceanic shelve to archieve a rough outline of the actual land masses
+   - add additional/substrative vectorial brushes to help refine the coastlines of the landmasses
+   - interactive topology setting
+   - automatic feature detailing (fractals ?)
+- project settings
+   - set globe size
+   - set planet gravitational constat
+- app settings
+   - change between the 3D view of the glob and different types of projections
+      - change the rotation of the globe inside projections
+
 ## 3.1 Basics
+
+### User account management
+> "As a user, I want to have access to all the usual account managements features expected from modern web applications"
+
+**Acceptance Criteria**:
+- [ ] Create account
+- [ ] Log in
+- [ ] Log off
+- [ ] Modify account informations
+- [ ] Recover account
 
 ### Startup & Project Creation
 > “As a user, I want to initialize a new tectonic project so I can begin designing a planet’s geologic timeline from scratch.”
 
 **Acceptance Criteria**:  
-- Create a new project (with optional custom radius).  
-- Name the project and store it in a dedicated folder.  
-- Display a blank 3D globe (Three.js).  
-- Timescale settings (e.g. 2000 Ma to 0 Ma) to define the timeline range.
-
-### Timescale Management
-> “As a user, I want to define a timescale in millions of years to reconstruct plate movement from a starting geologic point.”
-
-**Acceptance Criteria**:  
-- A timescale bar or input to set start/end times.  
-- A slider or numeric field to jump to specific times.  
-- Globe updates to show plate positions (once plates exist).
+- [ ] Create a new project.  
+   - [ ] Give the project a name
+   - [ ] Set various project settings (gravitational constant, planet radius)
+- [ ] Display the blank default globe to start working
 
 ### Saving the Project
 > “As a user, I want to save my current project data so I can reopen it later.”
 
 **Acceptance Criteria**:  
-- A ‘Save Project’ action storing feature collections, rotation data, etc.  
-- Reloading the project restores the globe state.
+- [ ] ‘Save Project’ action storing the various features of the project
+- [ ] If the project already exists, update its state
+- [ ] Create a new entry in the database if the project is new
 
----
-
-## 3.2 Making & Moving Plates
-
-### Creating Initial Continents (Supercontinent)
-> “As a user, I want to create polygonal features on the globe so I can define my initial supercontinent layout.”
+### Load Project
+> “As a user, I want to be able to open one of my saved projects"
 
 **Acceptance Criteria**:  
-- Draw polygons (click to place vertices).  
-- Each polygon has a feature type (e.g., Craton, ContinentalCrust) and unique Plate ID.  
-- Color-coded by Plate ID; editable vertices.  
-- Stored in the project.
+- [ ] A ‘Load project’ action to open an existing project
+- [ ] Displays a list of the user's current projects
+
+---
+## 3.2 Drawing on the sphere
+
+### Node by node drawing
+> "As a user, I want to be able to put down a series of nodes that gets connected into a polygon"
+
+### Node by node editing
+> "As a user, I want to be able to displace or delete existing nodes in order to change the shape of a feature"
+
+### Logic feature editing
+> "As a user, I want to be able to edit a feature by drawing an other feature and applying a logical opperation between the two (additive, substrative, ...)"
+
+### Pencil drawing
+> "As a user, I want to be able to draw a line on the globe and have it automatically convert in a serie of points"
+
+---
+## 3.3 Project and feature data
+
+### Project data
+> "As a user, I want to be able to track multiple informations about the world"
+
+**Acceptance Criteria**
+- [ ] Tracking the total land coverage of the planet
+
+### Feature data
+> "As a user, I want to be able to click on a feature to see multiple informations about it"
+
+**Acceptance Criteria**
+- [ ] Get the age of the feature
+- [ ] Get the current speed of the feature
+- [ ] Get the area of the feature (if pertinent)
+- [ ] Get various geometric informations about the feature
+
+### Feature history
+> "As a user, I want to be able to access a small history of the various events that have happened to a feature"
+
+---
+## 3.4 Making & Moving Plates
+
+### Creating initial cratons
+> “As a user, I want to be able to draw cratons on the sphere to lay out the base of the initial supercontinent"
+
+**Acceptance Criteria**:  
+- [ ] A craton option that allows the user to add a new craton on the sphere
+- [ ] Confirming the shape of the craton
+
+### Creating the initial supercontinent
+> "As a user, I want to be able to surround the cratons with the initial continental crust"
+
+- [ ] A continental crust option that allows the user to surroung the cratons with a new polygon
+- [ ] Check if the supercontinent correctly surrounds every cratons
+
+### Flowlines and mid ocean ridges
+> "As a user, I want to see flowlines between diverging plates as well as the mid ocean ridge"
+
+**Acceptance Criteria**:  
+- [ ] flowlines appear between divergent plates
+- [ ] notify the use if the flowlines cross each other (bad practices)
+- [ ] keep track of the mid ocean ridge as the plates moves
 
 ### Defining Rifts
 > “As a user, I want to draw a rift line across a continent so it can split into two separate plates.”
 
 **Acceptance Criteria**:  
-- Ability to create a ‘rift’ (polyline) with a specified start time.  
-- Splits the affected polygon(s) into two new polygons, each possibly with a new Plate ID.
+- [ ] draw a polyline through a plate
+- [ ] extrapolate the polyline to features that needs to be split too (island arcs, oceanic plate)
+- [ ] check that the rift doesn't goes through any cratons
 
-### Splitting a Feature (Continent)
-> “As a user, I want to split an existing polygon along the rift line so each side can move independently.”
-
-**Acceptance Criteria**:  
-- System clones the original polygon into two polygons.  
-- Original polygon ends at rift time; new polygons begin at that time.
-
-### Managing Plate Rotations (Euler Poles)
-> “As a user, I want to define rotation parameters over time so plates can drift realistically.”
+### adding failed rifts
+> "As a user, I want to draw a polyline comming from either a node of a rift or the side of a plate to define a failed rift. This failed rift can be used as the template for full rifts"
 
 **Acceptance Criteria**:  
-- User can set plate rotation axes/angles at specific timestamps.  
-- The system interpolates positions for continuous motion.  
-- Rotations stored in a back-end structure.
+- [ ] I can draw a polyline with a node of a continental plate or rift as starting point
+- [ ] I can reactivate a failed rift and extend it into a full rift
 
-### Moving Plates Over Time
-> “As a user, I want to move plates step-by-step so I can visualize continental drift.”
-
-**Acceptance Criteria**:  
-- Timeline increments (e.g. 50 My).  
-- Reposition plates via 3D controls.  
-- Automatic data updates; optional playback mode.
-
-### Flowlines (Mid-Ocean Basins)
-> “As a user, I want to generate flowlines showing new oceanic crust forming at diverging boundaries.”
+### Splitting a Feature
+> “As a user, I want to split an existing plate along the rift line so each side can be considered as different plates and move independently"
 
 **Acceptance Criteria**:  
-- User selects plates + time interval.  
-- Multi-point flowlines appear, updating when plate motion changes.
+- [ ] the two split plates are considered as two and move independently
+uu
+### Making the plates drift
+> "As a user, I want to define a direction and a speed in order to make a plate drift over a set period of time"
+
+**Acceptance Criteria**:
+- [ ] inputing a speed, a direction and a length of time correctly displaces the plate
+- [ ] every features that are associated to the plate move in sinc with the plate
 
 ### Adding Ocean Crust
-> “As a user, I want to fill newly opened gaps with ‘OceanicCrust’ polygons.”
+> “As a user, i want the space between diverging plates to be filled with oceanic crust"
 
 **Acceptance Criteria**:  
-- Polygons labeled as OceanicCrust.  
-- Start time matches the formation step.  
-- Assigned to the appropriate Plate ID.
+- [ ] oceanic crust get's created between divergent plates
+- [ ] the new oceanic crust get's added to the plate on their side of the mid ocean ridge
+- [ ] the age of the oceanic crust is kept track off
 
-### Subduction Zones & Island Arcs
-> “As a user, I want to mark convergent boundaries and generate island arcs.”
+### Adding subduction zones
+> "As a user, I want to mark convergent boundaries as subduction zones that will inform the movement of the plates"
 
 **Acceptance Criteria**:  
-- Draw a polyline for subduction zone.  
-- Island arcs form behind the trench after some delay.  
-- Arcs share the overriding plate’s ID.
+- [ ] I can draw a polyline that is considered as a subduction zone
+
 
 ---
-
-## 3.3 Complex Plate Interactions
-
-### Importing Custom Rasters
-> “As a user, I want to overlay an equirectangular image on the globe for reference.”
-
-**Acceptance Criteria**:  
-- Upload an image.  
-- Overlay toggles (opacity, visibility).  
-- Aids in aligning features to real or custom maps.
-
-### Splitting Co-Moving Plates
-> “As a user, I want to rift two plates that used to move as one.”
-
-**Acceptance Criteria**:  
-- Draw a rift.  
-- System splits polygons, updates the rotation data.  
-- One part keeps the old plate motion; the other gets a new ID.
-
-### Creating Entirely New Plates
-> “As a user, I want to define a new microplate from an existing land or ocean region.”
-
-**Acceptance Criteria**:  
-- User selects a region, chooses a new Plate ID, sets time.  
-- Baseline rotation entries are created.  
-- Updated polygons belong to the new plate from that time onward.
+## 3.5 Plate collision
 
 ### Subducting Ocean Crust & Collisions
 > “As a user, I want to mark where older ocean crust subducts or where plates collide.”
@@ -320,8 +368,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - Rotation data updated for new plate motion.
 
 ---
-
-## 3.4 Marking Resulting Features
+## 3.6 Marking Resulting Features
 
 ### Orogenies (Mountain Belts)
 > “As a user, I want to place orogenies (mountain belts) along convergent boundaries.”
@@ -356,8 +403,31 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - Boundaries evolve as user changes plate configurations.
 
 ---
+## 3.7 Options and export
 
-## 3.5 Finishing & Exporting
+### switch between 3D and projection
+> "As a user, I want to be able to switch my view between the 3D view of the globe and a projection, as well as change the origin point of the projection"
+
+**Acceptance Criteria**:
+- [ ] switch between 3D view and projection view
+- [ ] change the type of projection
+- [ ] change the origin point of the projection
+
+### change color settings
+> "As a user, I want to be able to change the fill and outline colors of different features as well as enable a heatmap colloration for features where age are important"
+
+**Acceptance Criteria**:
+- [ ] modify the fill color of a feature
+- [ ] modify the outline color of a feature
+- [ ] color features based on their age with a heatmap
+
+### Importing reference
+> “As a user, I want to overlay an equirectangular image on the globe for reference.”
+
+**Acceptance Criteria**:  
+- Upload an image.  
+- Overlay toggles (opacity, visibility).  
+- Aids in aligning features to real or custom maps.
 
 ### Final Display Adjustments
 > “As a user, I want to toggle/hide features to produce a clear map.”
@@ -454,7 +524,16 @@ This **MVP** ensures that all major layers (Django, HTMX, Rust→WASM, Three.js)
 ---
 
 # Position of the Solution
-
+- Improvement over GPlates
+   - not having to create collections
+   - not having to save manually each collection
+   - not having to manage IDs
+   - not having to manually clone and modify plate once split happens
+   - not having to specify start time and end time for every feature
+   - not having to maintain the rotation.rot file
+   - not having to manually manage flowlines, mid ocean ridges and newly created ocean crust
+   - Informing the user of where features should go based on their decisions (subduction zones, island arcs, orogenies)
+   - automatically delete subducted features
 ## 5.1 Existing Solutions: Strengths, Weaknesses, and Gaps
 
 Use this **comparison table** for a quick overview:
