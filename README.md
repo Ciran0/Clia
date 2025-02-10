@@ -2,6 +2,82 @@
 
 ## Table of Contents
 
+- [Problem and Context](#problem-and-context)
+  - [1.1 Background](#1.1-background)
+  - [1.2 The Gap in Existing Tools](#1.2-the-gap-in-existing-tools)
+  - [1.3 Project Overview](#1.3-project-overview)
+- [Identification of Major Agents](#identification-of-major-agents)
+  - [2.1 Overview of Main Agents](#2.1-overview-of-main-agents)
+  - [2.2 Potential Clients and Their Roles](#2.2-potential-clients-and-their-roles)
+- [Feature Analysis](#feature-analysis)
+  - [3.1 Basics](#3.1-basics)
+    - [User Account Management](#user-account-management)
+    - [Startup & Project Creation](#startup--project-creation)
+    - [Saving the Project](#saving-the-project)
+    - [Load Project](#load-project)
+  - [3.2 Drawing on the Sphere](#3.2-drawing-on-the-sphere)
+    - [Node by Node Drawing](#node-by-node-drawing)
+    - [Node by Node Editing](#node-by-node-editing)
+    - [Logic Feature Editing](#logic-feature-editing)
+    - [Pencil Drawing](#pencil-drawing)
+  - [3.3 Project, Feature Data and Tools](#3.3-project-feature-data-and-tools)
+    - [Measuring Tool](#measuring-tool)
+    - [Project Data](#project-data)
+    - [Feature Data](#feature-data)
+    - [Feature History](#feature-history)
+  - [3.4 Making & Moving Plates](#3.4-making--moving-plates)
+    - [Creating Initial Cratons](#creating-initial-cratons)
+    - [Creating the Initial Supercontinent](#creating-the-initial-supercontinent)
+    - [Arbitrary Editing](#arbitrary-editing)
+    - [Flowlines and Mid-Ocean Ridges](#flowlines-and-mid-ocean-ridges)
+    - [Defining Rifts](#defining-rifts)
+    - [Adding Failed Rifts](#adding-failed-rifts)
+    - [Splitting a Feature](#splitting-a-feature)
+    - [Making the Plates Drift](#making-the-plates-drift)
+    - [Adding Ocean Crust](#adding-ocean-crust)
+    - [Adding Subduction Zones](#adding-subduction-zones)
+    - [Subduction of Oceanic Crust and Other Features](#subduction-of-oceanic-crust-and-other-features)
+  - [3.5 Colliding](#3.5-colliding)
+    - [Collision Detection](#collision-detection)
+    - [Small Collision Management](#small-collision-management)
+    - [Major Collision Management](#major-collision-management)
+  - [3.6 Feature Indications](#3.6-feature-indications)
+    - [Island Arcs Indication](#island-arcs-indication)
+    - [Hotspot Placement and Trail Indication](#hotspot-placement-and-trail-indication)
+    - [Large Igneous Provinces](#large-igneous-provinces)
+    - [Orogenies Indications](#orogenies-indications)
+  - [3.7 Static Tools](#3.7-static-tools)
+    - [Automatic Oceanic Shelf Carving](#automatic-oceanic-shelf-carving)
+    - [Dynamic Feature Detailing](#dynamic-feature-detailing)
+    - [Dynamic Topology Generation](#dynamic-topology-generation)
+    - [Expanded Topologic Tools](#expanded-topologic-tools)
+  - [3.8 Options and Export](#3.8-options-and-export)
+    - [Switch Between 3D and Projection](#switch-between-3d-and-projection)
+    - [Change Color Settings](#change-color-settings)
+    - [Importing Reference](#importing-reference)
+    - [Final Display Adjustments](#final-display-adjustments)
+    - [Exporting Maps & Timelapse](#exporting-maps--timelapse)
+- [Methodology, Organization of the Project](#methodology-organization-of-the-project)
+  - [4.1 Minimum Viable Product (MVP)](#4.1-minimum-viable-product-mvp)
+  - [4.2 Phases of Development](#4.2-phases-of-development)
+  - [4.3 Agile Tooling](#4.3-agile-tooling)
+  - [4.4 Flexibility and Risk Management](#4.4-flexibility-and-risk-management)
+- [Position of the Solution](#position-of-the-solution)
+  - [5.1 Existing Solutions: Weaknesses and Gaps](#5.1-existing-solutions-weaknesses-and-gaps)
+  - [5.2 Advantages of Developing a Dedicated New Tool](#5.2-advantages-of-developing-a-dedicated-new-tool)
+- [Technical Analysis](#technical-analysis)
+  - [6.1 Key Challenges and Objectives](#6.1-key-challenges-and-objectives)
+  - [6.2 High-Level Architecture Overview](#6.2-high-level-architecture-overview)
+  - [6.3 Back-End Layer (Django + HTMX)](#6.3-back-end-layer-django--htmx)
+  - [6.4 3D Rendering & Front-End Visualization (Three.js)](#6.4-3d-rendering--front-end-visualization-threejs)
+  - [6.5 High-Performance Geometry: Rust → WebAssembly](#6.5-high-performance-geometry-rust--webassembly)
+  - [6.6 Supporting Tools & Methodologies](#6.6-supporting-tools--methodologies)
+  - [6.7 Comparison of Final Stack vs. Potential Alternatives](#6.7-comparison-of-final-stack-vs-potential-alternatives)
+  - [6.8 Justification of Each Final Choice](#6.8-justification-of-each-final-choice)
+  - [6.9 Potential Limitations & Future Enhancements](#6.9-potential-limitations-et-future-enhancements)
+- [Validation Strategy](#validation-strategy)
+- [Security & GDPR](#security-et-gdpr)
+
 ---
 
 # Problem and Context
@@ -11,15 +87,14 @@ Worldbuilding is the act of creating fictional settings. It is most often used b
 But worldbuilding is in itself an aglomeration of many other, more specific practices like conlanging (creating languages), neography (creating writing systems) or mapmaking (creating fictional maps) and many more.
 One pretty well known tricks that can be used to impart complexity, richess and a sens of belivablitly to any worldbuilding project is to make it's history. Instead of building the thing only at the state that matters to you, you create it at an arbitrary point in the past and artificially simulate it's evolution up until the point that interests you. This process is way more time consuming but also more complicated as you have to understand how things like languages, alphabets, ecosystems or geology evolve over time. 
 But for some worldbuilders this extra effort is worth it.
-For simulating the evolution of a lot of things, paper, motivation and a great amount of knowledge is enough. But when we talk about the evolution of the geography of a planet, it get's way more complicated as the finaly product is basically a small film of continents moving on a sphere (anybody that can make that with paper get's my undying respect).
+For simulating the evolution of a lot of things, paper, motivation and a great amount of knowledge is enough. But when we talk about the evolution of the geography of a planet, it gets way more complicated as the finaly product is basically a small film of continents moving on a sphere (anybody that can make that with paper gets my undying respect).
 
 Making geological history of maps is still, even in the worldbuilding hobby, a pretty niche subject, despite the fact that geography is probably one of the highest building block of any worldbuilding projects.
-
 ## 1.2 The Gap in Existing Tools
 The main reason, in my opinion, that geological histories are sadly not as common in the worldbuilding community is because there curently is a gap in the existing available tools to do so :
 
 - **Fantasy map tools** (World Anvil, Wonderdraft, Inkarnate):
-   These tools are mostly made for artistic design and story building. They can be very usefull to anotate maps or follow the progression in a story but they provide very few ways to animate the map, draw it directly on a sphere and absolutely no way to manipulate the geography of the map like real techtonic plates.
+   These tools are mostly made for artistic design and story building. They can be very useful to annotate maps or follow the progression in a story but they provide very few ways to animate the map, draw it directly on a sphere and absolutely no way to manipulate the geography of the map like real tectonic plates.
 - **Scientific software** (GPlates):
    This is a professional-level application for real plate tectonics. It is extremely powerful but geared toward Earth’s data and workflows. It might be too technical for most worldbuilders and it is not designed to handle fictional mapmaking. Using it in this way has its own quirks.
 
@@ -43,7 +118,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
       **Worldbuilders**:
          Worldbuilders are simply people that want to create worlds, for any reason. They are the main target for this tool and while the worldbuilding community is quite large, making geological history is still a niche topic. This is why this project has to cater to both the casual worldbuilder that want to try their hand at geologic histories and the hardcore user who want to explore alternatives to GPlates.
       **Educators**:
-         While this application is mainly targetted at worldbuilders, the opportunity of having an easy to use tool to represent techtonic interaction can be really usefull for anybody wanting to teach the basics of techtonic principles.
+         While this application is mainly targetted at worldbuilders, the opportunity of having an easy to use tool to represent tectonic interaction can be really useful for anybody wanting to teach the basics of tectonic principles.
 2. **Worldbuilding Pasta**:
    Worldbuilding Pasta is the name of a blog focused on scientifically acurate worldbuilding. This blog is by far the best ressource on the use of GPlates as a tool for fantasy geological history making [Making an apple pie from scratch V](https://worldbuildingpasta.blogspot.com/2020/06/an-apple-pie-from-scratch-part-v.html). The writer of the blog has been contacted and has expressed interest in the project but is currently waiting for the project to be better defined in order to decide if they want to involve themselves in the project. Their input on this project could be an amazing asset and they will be recontacted as the project develop in order to keep them informed.
 3. **Artifexian**:
@@ -57,7 +132,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 | **Artifexian**   | Produces worldbuilding, cartography, and conlang videos on Youtube | Showed interest in the project a year ago, but has not been reachable since the project has started | None currently but might act as an expert or help expose the project to a wider audience. Furethermore, the Worldbuilder's log video serie is used as one of the main ressources for the worldbuilding/geologic side of the app|
 | **WorldbuildingPasta**      | Blogger focused on advanced worldbuilding and specialist in the use of GPlates for fictional geologic history | Enthusiastic but wants more details before involving themselves more in the project.| None currently but might act as an expert once the project becomes more defined, the Worldbuilding Pasta blog is a really important inspiration for this project.|
 | **Me**| Student at Ephec with an interest in web developement| Amateur worldbuilder | current developer and owner of the project, will act as main client for the time beeing |
-| **The worldbuilding community** (target users)| Anybody that has interest in worldbuilding | the few contacts I had with members of the community were positive, The project will have to be in a more advanced state before expositing it to the broader community | the project purpose is to be shared and used by as many people as possible, but setting ways of involving the community in the feedback process (discord server) is prematured |
+| **The worldbuilding community** (target users)| Anybody that has interest in worldbuilding | the few contacts I had with members of the community were positive, The project will have to be in a more advanced state before expositing it to the broader community | the project purpose is to be shared and used by as many people as possible, but setting ways of involving the community in the feedback process (discord server) is premature |
 
 ---
 
@@ -66,7 +141,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 ## 3.1 Basics
 
 ### User account management
-> "As a user, I want to have access to all the usual account managements features expected from modern web applications"
+> "As a user, I want to have access to all the usual account managements features expected from modern web applications in order to access and load my projects that are saved on the server"
 
 **Acceptance Criteria**:
 - [ ] Create account
@@ -148,13 +223,13 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 **Acceptance Criteria**
 - [ ] the measuring tool can be used to acurately measure distances on the sphere
 
-### Project data
+### Tracking of various informations of the project
 > "As a user, I want to be able to track multiple informations about the world"
 
 **Acceptance Criteria**
 - [ ] Tracking the total land coverage of the planet
 
-### Feature data
+### Tracking of various information of different feature
 > "As a user, I want to be able to click on a feature to see multiple informations about it"
 
 **Acceptance Criteria**
@@ -179,11 +254,11 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 ### Creating the initial supercontinent
 > "As a user, I want to be able to surround the cratons with the initial continental crust"
 
-- [ ] A continental crust option that allows the user to surroung the cratons with a new polygon
+- [ ] A continental crust option that allows the user to surround the cratons with a new polygon
 - [ ] Check if the supercontinent correctly surrounds every cratons
 
 ### Arbitrary editing
-> "As a user, I want to be able to create or modify features without having to justify it with techtonic history"
+> "As a user, I want to be able to create or modify features without having to justify it with tectonic history"
 
 - [ ] A "generic feature" option that allows the user to add custom features
 - [ ] The user can define how these new features interact with the tectonic process
@@ -193,7 +268,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 **Acceptance Criteria**:  
 - [ ] flowlines appear between divergent plates
-- [ ] notify the use if the flowlines cross each other (bad practices)
+- [ ] notify the user if the flowlines cross each other (bad practices)
 - [ ] keep track of the mid ocean ridge as the plates moves
 
 ### Defining Rifts
@@ -205,7 +280,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] check that the rift doesn't goes through any cratons
 
 ### adding failed rifts
-> "As a user, I want to draw a polyline comming from either a node of a rift or the side of a plate to define a failed rift. This failed rift can be used as the template for full rifts"
+> "As a user, I want to draw a polyline coming from either a node of a rift or the side of a plate to define a failed rift. This failed rift can be used as the template for full rifts"
 
 **Acceptance Criteria**:  
 - [ ] I can draw a polyline with a node of a continental plate or rift as starting point
@@ -216,7 +291,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 **Acceptance Criteria**:  
 - [ ] the two split plates are considered as two and move independently
-uu
+
 ### Making the plates drift
 > "As a user, I want to define a direction, rotation and a speed in order to make a plate drift over a set period of time"
 
@@ -228,8 +303,8 @@ uu
 > “As a user, i want the space between diverging plates to be filled with oceanic crust"
 
 **Acceptance Criteria**:  
-- [ ] oceanic crust get's created between divergent plates
-- [ ] the new oceanic crust get's added to the plate on their side of the mid ocean ridge
+- [ ] oceanic crust gets created between divergent plates
+- [ ] the new oceanic crust gets added to the plate on their side of the mid ocean ridge
 - [ ] the age of the oceanic crust is kept track off
 
 ### Adding subduction zones
@@ -239,10 +314,10 @@ uu
 - [ ] I can draw a polyline that is considered as a subduction zone
 
 ### Subduction of oceanic crust and other features
-> "As a user, I want to see features like the oceanic crust disapear as they get subducted"
+> "As a user, I want to see features like the oceanic crust disappear as they get subducted"
 
 **Acceptance Criteria**:
-- hen a feature that would not create collisions (oceanic plates, mid ocean rifts ...) crosses a subduction zone, it's geomtry get's updated in order to give the impression that it "dissapears" under the subduction zone
+- when a feature that would not create collisions (oceanic plates, mid ocean rifts ...) crosses a subduction zone, it's geomtry gets updated in order to give the impression that it "dissapears" under the subduction zone
 
 ---
 ## 3.5 Colliding
@@ -263,7 +338,7 @@ uu
 - [ ] the surface of the accreted terrain correspond to the expected surface of the island arc at the time of collision
 
 ### Major collision management
->"As a user, when a major collision occurs (plate vs plate), i want to be able to keep track of the features the "disapear in this collision" as well as manage the various deformations of geometry that occurs in the collision."
+>"As a user, when a major collision occurs (plate vs plate), i want to be able to keep track of the features that "disappear in this collision" as well as manage the various deformations of geometry that occurs in the collision."
 
 **Acceptance Criteria**:
 - [ ] the features caugh in the collision are remembered (for things like tracking fossils)
@@ -302,10 +377,10 @@ uu
 **Acceptance Criteria**:
 - [ ] locations of expected orogenies are dispayed on the plates
 - [ ] active/passive state of the orogenies can be set
-- [ ] the age of the orogenies is kept track of as well as the time since the orogenie was active
+- [ ] the age of the orogenies is kept track of, as well as the time since the orogenie was active
 
 ## 3.7 Static tools
-those are options that are not relevant in the actual simulation process but allows the user to polish a specific state of the map.
+those are options that are not relevant in the actual simulation process but allow the user to polish a specific state of the map.
 
 ### automatic oceanic shelf carving
 > "As a user, I want to have an option to autmatically carve the appropriate depth into the oceanic shelf in order to have a more accurate picture of the actual landmasses
@@ -366,98 +441,57 @@ those are options that are not relevant in the actual simulation process but all
 
 ---
 
-# Methodology, Organization of the Project
+# Technical Analysis
 
-## 4.1 Minimum Viable Product : Barebone vector animation tool on a sphere
+## 4.1 Key Challenges and objectives
+- Balancing **Accessibility** and **Scientific accuracy** : This project should be available and usable by the largest number of worldbuilder while still beeing a real help to making scientifically robust geologic history. Things like the UI and the workflow should not hinder the accuracy of the tool while still having a small learning curve and encouraging an iterative process and experimentation.
+- Balancing **Performance** and **Complexity** : The hardware of the user should not be a roadblock to them using the service, it should feel fast in order to not stop the creative process. At the same time, things like manipulation and colision checks of polygons on a sphere can be complexe and computationally heavy. Solutions have to be found in order to manage those two aspects of the project.
+- Focusing on what is important : The premice of this project is quite complexe, therefore an effort should be made in order to avoid unnecessary complexity where it is possible.
 
-1. **3D Globe Visualization**  
-   - Basic globe in Three.js
+## 4.2 High-Level Architecture Overview
+We need a browser-based solution that:
+1. **Renders a 3D globe** (Three.js) for interactive plate drawing.  
+2. **Computes geometry** in Rust→WASM for performance.  
+3. **Stores data** in Django, employing HTMX for partial page updates.  
+4. **Scales** with agile increments.
 
-2. **Polygon and Polyline Drawing & Storage**  
-   - Draw polygonal features on the globe in a "node by node" fashion.  
-   - Edit existing polygons in a "node by node" fashin (delete, add, translate)
+## 4.2 Back-End Layer (Django + HTMX)
+A Python-based framework for robust data handling and quick partial updates:
+- **Django**: Admin, ORM, security.  
+- **HTMX**: Enables partial HTML updates with minimal JavaScript overhead.
 
-3. **Translation & Rotation of Polygons**  
-   - Select a polygon to **translate** or **rotate** on the globe.  
-   - Geometric core (Rust→WASM) handles geometry calculations, returning updated state of features
-   - Immediate feedback in the 3D scene.
+## 4.3 3D Rendering & Front-End Visualization (Three.js)
+- **Three.js** for an interactive 3D globe.  
+- Large community, flexible scene management, easy to integrate with HTML/JS.
 
-4. **Feature spliting**
-   - split a feature in two along a defined polyline
-   - the resulting split features can be edited individually
+## 4.4 High-Performance Geometry: Rust → WebAssembly
+- **WebAssembly** for near-native performance in numeric tasks.  
+- **Rust** ensures memory safety and strong tooling.  
+- Handles polygon splitting, Euler rotations, collisions, etc.
 
-5. **Keyframe based animation**
-   - Pair the transformations of the polygons with keyframes on a timeline
-   - Visualize the entire animation
-   - Store the animation in the database
+## 4.5 Supporting Tools & Methodologies
+- **Database & ORM**: Likely PostgreSQL for multi-user or advanced queries.  
+- **Synchronous Django** acceptable for a single-user or small group.  
+- **Security**: Django’s built-in session/auth + standard web best practices.
 
-6. **Basic account and project management**
-   - Users can sign up, log ing ...
-   - A new project can be created, named ...
+## 4.6 Comparison of Final Stack vs. Potential Alternatives
 
-## 4.2 Phases of Development
+| **Layer**         | **Chosen**                         | **Alternatives**                            | **Reason**                                                 |
+|-------------------|------------------------------------|---------------------------------------------|------------------------------------------------------------|
+| Back End          | Django + HTMX                      | Flask, FastAPI, FastHtml, Node.js                     | Built-in admin, robust security, partial updates with HTMX.  |
+| Front End         | Three.js + minimal JS + HTMX        | React/Vue SPAs, Babylon.js, CesiumJS        | Straightforward 3D rendering, no heavy SPA needed.         |
+| Geometry          | Rust → WASM                        | C/C++ → WASM, AssemblyScript, Go → WASM     | Safe concurrency, performance, mature Rust→JS ecosystem.   |
+| 3D Visualization  | Three.js                           | Babylon.js, raw WebGL, other 3D engines     | Large community, flexible, examples for custom geometry.   |
 
-### Phase 1: Project Setup & MVP Definition
-- **Goals**: 
-  - Repo structure on GitHub, Django + HTMX skeleton, Rust→WASM toolchain, minimal Three.js globe ...
-  - Document the MVP scope in GitHub issues.
+## 4.7 Justification of Each Final Choice
+1. **Django + HTMX**: Quick to set up, proven reliability, partial updates.  
+2. **Rust → WASM**: Safe, high-performance math for plate-tectonic logic, good integrated web assembly toolchain
+3. **Three.js**: Well-documented 3D library for a custom globe approach.  
 
-### Phase 2: MVP Implementation
-- **Goals**:
-   - Complete implementation of the MVP
-   - Implemetation of project settings (i.e : globe size)
-   - Testing 
-   - Deployment
-
-### Phase 3: Polished MVP and advanced vector tooling
-- **Goals**: 
-   - Polishing the MVP in order to prepare for feedback (UI, UX)
-   - Finish the implementation of the vector drawing tools
-   - Complete implementation of the animation features
-
-### Phase 4: Techtonic featureset implementation
-- **Goals**:
-   - Implementation of feature labelization (craton, continental/oceanic crust, rifts, island arcs ...)
-   - Implemetation of age tracking
-   - Plate understanding (translation and edition of multiple features that are considered to be part of the same "plate")
-   - Collision detection
-
-### Phase 5: Automatic feature indication and smarter collisions
-- **Goals**: 
-   - Implementation of automatic feature creation
-      - Orogenies
-      - Island arcs
-      - Hotspot trails
-   - Implementation of more complete collision management (island arcs -> accreted terrain, integration of features into orogenies ...)
-
-### Phase 6: Advanced project settings, export and tools
-- **Goals**:
-   - Implementation of remaining usefull tools and settings
-   - Implementation of wider export options (png, svg, mp4, gif ...)
-
-### Phase 7: Wrap up of the 1.0
-- **Goals**:
-   - Final deployment of the project
-   - bugfixing based on feedback
-
-### Phase 8: Post tfe features
-- **Goals**:
-   - support
-   - Implemetation of advanced options and tooling that got left out from the 1.0
-
-## 4.3 Agile Tooling
-
-- **Git + GitHub**:  
-  - Branching, pull requests, issues, GitHub Projects.  
-- **Clockify (Optional)**:  
-  - Time tracking for productivity if helpful.  
-- **Frequent Commits & Iteration**:  
-  - Each phase yields a working build.  
-  - Re-prioritize tasks as needed.
-
-## 4.4 Flexibility and Risk Management
-- **Agile, incremental** approach allows re-scoping if complexities arise (math, performance).  
-- MVP ensures a baseline deliverable; phases accommodate new ideas or user feedback.
+## 4.8 Potential Limitations et Future Enhancements
+- **Web assembly to js pipeline** : with a lot of frequent updates the serialization/deserialization of data between javascript and the web assembly might quickly become a bottleneck, the use of shared memory and webworkers might help alliviate this problem
+- **Collaboration**: Real-time collaboration might need Django Channels or websockets.  
+- **WebGPU**: Future improvement for massive polygons or advanced rendering.
 
 ---
 
@@ -465,9 +499,9 @@ those are options that are not relevant in the actual simulation process but all
 
 ## 5.1 Existing Solutions:Weaknesses and Gaps
 - **GPlates** :
-   - Scientific tool made for earth based techtonic .
-   - Most of the features of GPlates are not usefull in the worldbuilding process
-   - GPlates is not made for worldbuilding, using it in this way can be tedious and combursome. 
+   - Scientific tool made for earth based tectonic .
+   - Most of the features of GPlates are not useful in the worldbuilding process
+   - GPlates is not made for worldbuilding, using it in this way can be tedious and cumbersome. 
    - Very few vector drawing capabilities
 - **Artistic Tools** :
    - Mapmaking specific tools (inkarnate, worldAnvil ...) :
@@ -481,7 +515,7 @@ those are options that are not relevant in the actual simulation process but all
 - **Blender** can do anything in 3D but lacks built-in geologic processes.
    - Very few vector drawing capabilites
    - No geologic understanding
-   - Most of the features of Blender are not usefull int the worldbuilding process
+   - Most of the features of Blender are not useful in the worldbuilding process
 
 A **hybrid approach** is needed: an intuitive “draw-and-animate” tool with built-in geologic understanding and allows the user to draw and animate with a complete set of vector tools on a sphere
 
@@ -515,57 +549,98 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
 
 ---
 
-# Technical Analysis
+# Methodology, Organization of the Project
 
-## 6.1 Key Challenges and objectives
-- Balancing **Accessibility** and **Scientific accuracy** : This project should be available and usable by the largest number of worldbuilder while still beeing a real help to making scientifically robust geologic history. Things like the UI and the workflow should not hinder the accuracy of the tool while still having a small learning curve and encouraging an iterative process and experimentation.
-- Balancing **Performance** and **Complexity** : The hardware of the user should not be a roadblock to them using the service, it should feel fast in order to not stop the creative process. At the same time, things like manipulation and colision checks of polygons on a sphere can be complexe and computationally heavy. Solutions have to be found in order to manage those two aspects of the project.
-- Focusing on what is important : The premice of this project is quite complexe, therefore an effort should be made in order to avoid unnecessary complexity where it is possible.
+## 5.1 Minimum Viable Product : Barebone vector animation tool on a sphere
 
-## 6.2 High-Level Architecture Overview
-We need a browser-based solution that:
-1. **Renders a 3D globe** (Three.js) for interactive plate drawing.  
-2. **Computes geometry** in Rust→WASM for performance.  
-3. **Stores data** in Django, employing HTMX for partial page updates.  
-4. **Scales** with agile increments.
+1. **3D Globe Visualization**  
+   - Basic globe in Three.js
 
-## 6.2 Back-End Layer (Django + HTMX)
-A Python-based framework for robust data handling and quick partial updates:
-- **Django**: Admin, ORM, security.  
-- **HTMX**: Enables partial HTML updates with minimal JavaScript overhead.
+2. **Polygon and Polyline Drawing & Storage**  
+   - Draw polygonal features on the globe in a "node by node" fashion.  
+   - Edit existing polygons in a "node by node" fashion (delete, add, translate)
 
-## 6.3 3D Rendering & Front-End Visualization (Three.js)
-- **Three.js** for an interactive 3D globe.  
-- Large community, flexible scene management, easy to integrate with HTML/JS.
+3. **Translation & Rotation of Polygons**  
+   - Select a polygon to **translate** or **rotate** on the globe.  
+   - Geometric core (Rust→WASM) handles geometry calculations, returning updated state of features
+   - Immediate feedback in the 3D scene.
 
-## 6.4 High-Performance Geometry: Rust → WebAssembly
-- **WebAssembly** for near-native performance in numeric tasks.  
-- **Rust** ensures memory safety and strong tooling.  
-- Handles polygon splitting, Euler rotations, collisions, etc.
+4. **Feature spliting**
+   - split a feature in two along a defined polyline
+   - the resulting split features can be edited individually
 
-## 6.5 Supporting Tools & Methodologies
-- **Database & ORM**: Likely PostgreSQL for multi-user or advanced queries.  
-- **Synchronous Django** acceptable for a single-user or small group.  
-- **Security**: Django’s built-in session/auth + standard web best practices.
+5. **Keyframe based animation**
+   - Pair the transformations of the polygons with keyframes on a timeline
+   - Visualize the entire animation
+   - Store the animation in the database
 
-## 6.6 Comparison of Final Stack vs. Potential Alternatives
+6. **Basic account and project management**
+   - Users can sign up, log ing ...
+   - A new project can be created, named ...
 
-| **Layer**         | **Chosen**                         | **Alternatives**                            | **Reason**                                                 |
-|-------------------|------------------------------------|---------------------------------------------|------------------------------------------------------------|
-| Back End          | Django + HTMX                      | Flask, FastAPI, FastHtml, Node.js                     | Built-in admin, robust security, partial updates with HTMX.  |
-| Front End         | Three.js + minimal JS + HTMX        | React/Vue SPAs, Babylon.js, CesiumJS        | Straightforward 3D rendering, no heavy SPA needed.         |
-| Geometry          | Rust → WASM                        | C/C++ → WASM, AssemblyScript, Go → WASM     | Safe concurrency, performance, mature Rust→JS ecosystem.   |
-| 3D Visualization  | Three.js                           | Babylon.js, raw WebGL, other 3D engines     | Large community, flexible, examples for custom geometry.   |
+## 5.2 Phases of Development
 
-## 6.7 Justification of Each Final Choice
-1. **Django + HTMX**: Quick to set up, proven reliability, partial updates.  
-2. **Rust → WASM**: Safe, high-performance math for plate-tectonic logic, good integrated web assembly toolchain
-3. **Three.js**: Well-documented 3D library for a custom globe approach.  
+### Phase 1: Project Setup & MVP Definition
+- **Goals**: 
+  - Repo structure on GitHub, Django + HTMX skeleton, Rust→WASM toolchain, minimal Three.js globe ...
+  - Document the MVP scope in GitHub issues.
 
-## 6.8 Potential Limitations & Future Enhancements
-- **Web assembly to js pipeline** : with a lot of frequent updates the serialization/deserialization of data between javascript and the web assembly might quickly become a bottleneck, the use of shared memory and webworkers might help alliviate this problem
-- **Collaboration**: Real-time collaboration might need Django Channels or websockets.  
-- **WebGPU**: Future improvement for massive polygons or advanced rendering.
+### Phase 2: MVP Implementation
+- **Goals**:
+   - Complete implementation of the MVP
+   - Implementation of project settings (i.e : globe size)
+   - Testing 
+   - Deployment
+
+### Phase 3: Polished MVP and advanced vector tooling
+- **Goals**: 
+   - Polishing the MVP in order to prepare for feedback (UI, UX)
+   - Finish the implementation of the vector drawing tools
+   - Complete implementation of the animation features
+
+### Phase 4: tectonic featureset implementation
+- **Goals**:
+   - Implementation of feature labelization (craton, continental/oceanic crust, rifts, island arcs ...)
+   - Implementation of age tracking
+   - Plate understanding (translation and edition of multiple features that are considered to be part of the same "plate")
+   - Collision detection
+
+### Phase 5: Automatic feature indication and smarter collisions
+- **Goals**: 
+   - Implementation of automatic feature creation
+      - Orogenies
+      - Island arcs
+      - Hotspot trails
+   - Implementation of more complete collision management (island arcs -> accreted terrain, integration of features into orogenies ...)
+
+### Phase 6: Advanced project settings, export and tools
+- **Goals**:
+   - Implementation of remaining useful tools and settings
+   - Implementation of wider export options (png, svg, mp4, gif ...)
+
+### Phase 7: Wrap-up of Version 1.0
+- **Goals**:
+   - Final deployment of the project
+   - bugfixing based on feedback
+
+### Phase 8: Post tfe features
+- **Goals**:
+   - support
+   - Implementation of advanced options and tooling that got left out from the 1.0
+
+## 5.3 Agile Tooling
+
+- **Git + GitHub**:  
+  - Branching, pull requests, issues, GitHub Projects.  
+- **Clockify (Optional)**:  
+  - Time tracking for productivity if helpful.  
+- **Frequent Commits & Iteration**:  
+  - Each phase yields a working build.  
+  - Re-prioritize tasks as needed.
+
+## 5.4 Flexibility and Risk Management
+- **Agile, incremental** approach allows re-scoping if complexities arise (math, performance).  
+- MVP ensures a baseline deliverable; phases accommodate new ideas or user feedback.
 
 # Validation Strategy
 1. **User Types**: Validate with beginner worldbuilders vs. advanced tectonics enthusiasts.  
@@ -575,7 +650,7 @@ A Python-based framework for robust data handling and quick partial updates:
 
 ---
 
-# Security & GDPR
+# Security et GDPR
 - **User Data**: Only minimal user info (e.g., logins) plus project data (polygons, timestamps).  
 - **Protection**: Django’s default CSRF, session security, HTTPS.  
 - **GDPR Considerations**: If storing personal data, provide user consent forms, data deletion on request, and relevant disclaimers. It might be possible to allow the user to only save their project locally if they want to keep complete ownership of their project
