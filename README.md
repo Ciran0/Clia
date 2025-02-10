@@ -100,6 +100,8 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 ---
 
+# Feature analysis
+
 ## 3.1 Basics
 
 ### User account management
@@ -399,60 +401,82 @@ those are options that are not relevant in the actual simulation process but all
 
 # Methodology, Organization of the Project
 
-## 4.1 Minimum Viable Product (MVP)
+## 4.1 Minimum Viable Product : Barebone vector animation tool on a sphere
 
 1. **3D Globe Visualization**  
    - Basic globe in Three.js
 
 2. **Polygon and Polyline Drawing & Storage**  
    - Draw polygonal features on the globe in a "node by node" fashion.  
-   - Store data
-   - edit a created poligon by adding, deleting
+   - Edit existing polygons in a "node by node" fashin (delete, add, translate)
 
 3. **Translation & Rotation of Polygons**  
    - Select a polygon to **translate** or **rotate** on the globe.  
-   - Rust→WASM handles geometry calculations, returning updated vertices.  
+   - Geometric core (Rust→WASM) handles geometry calculations, returning updated state of features
    - Immediate feedback in the 3D scene.
 
-4. **Project Management**  
-   - Create and name multiple projects.  
-   - Each project can have multiple polygons.  
-   - Load/save projects in the DB.
+4. **Feature spliting**
+   - split a feature in two along a defined polyline
+   - the resulting split features can be edited individually
 
-5. **Basic UI & HTMX**  
-   - Partial updates for data changes.  
-   - Avoid full-page reloads; everything integrated in a fluid web interface.
+5. **Keyframe based animation**
+   - Pair the transformations of the polygons with keyframes on a timeline
+   - Visualize the entire animation
+   - Store the animation in the database
+
+6. **Basic account and project management**
+   - Users can sign up, log ing ...
+   - A new project can be created, named ...
 
 ## 4.2 Phases of Development
 
 ### Phase 1: Project Setup & MVP Definition
 - **Goals**: 
-  - Repo structure on GitHub, Django + HTMX skeleton, Rust→WASM toolchain, minimal Three.js globe, etc.  
+  - Repo structure on GitHub, Django + HTMX skeleton, Rust→WASM toolchain, minimal Three.js globe ...
   - Document the MVP scope in GitHub issues.
 
 ### Phase 2: MVP Implementation
-- **Goals**: 
-  - Implement polygon drawing on the globe, storing to DB.  
-  - Connect Rust→WASM for basic rotations.  
-  - Basic UI for project management.
-
-### Phase 3: Core Tectonic Features
-- **Goals**: 
-  - Rifting, polygon splitting, subduction, collisions (basic).  
-  - Interactive timeline or rotation controls.  
-  - Validate data flow and geometry.
-
-### Phase 4: Feedback, Polishing & Extended Features
 - **Goals**:
-  - Gather input from WorldbuildingPasta / Artifexian if possible.  
-  - Optimize performance.  
-  - Add advanced geometry (flowlines, orogenies), map exporting, etc.
+   - Complete implementation of the MVP
+   - Implemetation of project settings (i.e : globe size)
+   - Testing 
+   - Deployment
 
-### Phase 5: Finalization & Documentation
+### Phase 3: Polished MVP and advanced vector tooling
 - **Goals**: 
-  - Wrap up features, fix bugs.  
-  - Comprehensive documentation and user guide.  
-  - Final testing and demonstration.
+   - Polishing the MVP in order to prepare for feedback (UI, UX)
+   - Finish the implementation of the vector drawing tools
+   - Complete implementation of the animation features
+
+### Phase 4: Techtonic featureset implementation
+- **Goals**:
+   - Implementation of feature labelization (craton, continental/oceanic crust, rifts, island arcs ...)
+   - Implemetation of age tracking
+   - Plate understanding (translation and edition of multiple features that are considered to be part of the same "plate")
+   - Collision detection
+
+### Phase 5: Automatic feature indication and smarter collisions
+- **Goals**: 
+   - Implementation of automatic feature creation
+      - Orogenies
+      - Island arcs
+      - Hotspot trails
+   - Implementation of more complete collision management (island arcs -> accreted terrain, integration of features into orogenies ...)
+
+### Phase 6: Advanced project settings, export and tools
+- **Goals**:
+   - Implementation of remaining usefull tools and settings
+   - Implementation of wider export options (png, svg, mp4, gif ...)
+
+### Phase 7: Wrap up of the 1.0
+- **Goals**:
+   - Final deployment of the project
+   - bugfixing based on feedback
+
+### Phase 8: Post tfe features
+- **Goals**:
+   - support
+   - Implemetation of advanced options and tooling that got left out from the 1.0
 
 ## 4.3 Agile Tooling
 
@@ -471,32 +495,50 @@ those are options that are not relevant in the actual simulation process but all
 ---
 
 # Position of the Solution
-- Improvement over GPlates
-   - not having to create collections
+
+
+## 5.1 Existing Solutions:Weaknesses and Gaps
+- **GPlates** :
+   - Scientific tool made for earth based techtonic .
+   - Most of the features of GPlates are not usefull in the worldbuilding process
+   - GPlates is not made for worldbuilding, using it in this way can be tedious and combursome. 
+   - Very few vector drawing capabilities
+- **Artistic Tools** :
+   - Mapmaking specific tools (inkarnate, worldAnvil ...) :
+      - Very few vector drawing capabilities
+      - Very few to no animation capabilites
+      - Almost allways impossible to draw on a sphere
+      - No geologic understanding
+   - Generic Drawing and animation tools (Illustrator, Photoshop, inkscape ...) :
+      - Inability to work on a sphere
+      - No geologic understanding
+- **Blender** can do anything in 3D but lacks built-in geologic processes.
+   - Very few vector drawing capabilites
+   - No geologic understanding
+   - Most of the features of Blender are not usefull int the worldbuilding process
+
+A **hybrid approach** is needed: an intuitive “draw-and-animate” tool with built-in geologic understanding and allows the user to draw and animate with a complete set of vector tools on a sphere
+
+### Improvements over GPlates
+As GPlates is the most direct equivalent to the Clia project I thought it was a good idea to detail specifically the improvements that can be made over it :
+   - not having to create collections :
+      - The user selects the type of feature they want to draw
+      - Every new feature is automatically labelled and manage
    - not having to save manually each collection
+      - The entire project can be saved in one action
    - not having to manage IDs
+      - The project manages the grouping of features into plates
+      - manual ID management is no longer needed
    - not having to manually clone and modify plate once split happens
+      - Feature splitting automatically creates new plates and assignes corresponding features
+      - No need to manually clone and delete verteces to split a feature into multiple
    - not having to specify start time and end time for every feature
+      - The keyframing of the features allows to manage their age without user interaction
    - not having to maintain the rotation.rot file
    - not having to manually manage flowlines, mid ocean ridges and newly created ocean crust
+      - The process of adding and managing these features is treamlined and automated
    - Informing the user of where features should go based on their decisions (subduction zones, island arcs, orogenies)
    - automatically delete subducted features
-## 5.1 Existing Solutions: Strengths, Weaknesses, and Gaps
-
-Use this **comparison table** for a quick overview:
-
-| **Tool**           | **Focus**       | **Strengths**                                                    | **Weaknesses**                                                                                                         |
-|--------------------|-----------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **GPlates**        | Scientific, Earth-based plate reconstructions | - Accurate for real Earth<br>- Powerful advanced features        | - Complex UI<br>- Steep learning curve<br>- Earth-centric<br>- Not art-oriented                                         |
-| **Artistic Tools** (Wonderdraft, Inkarnate) | Fantasy map drawing | - Very easy to use<br>- Beautiful output, many assets           | - No geophysical realism<br>- 2D-only<br>- No plate animation                                                           |
-| **Blender**        | 3D modeling & animation                        | - Extremely flexible<br>- Professional rendering                 | - No native tectonic logic<br>- High learning curve<br>- Manual rigging for plate motions                               |
-
-## 5.2 Why a New Solution?
-- **GPlates** is scientific but too specialized for imaginary worlds.  
-- **Artistic Tools** are visually appealing but lack tectonic realism.  
-- **Blender** can do anything in 3D but lacks built-in geologic processes.
-
-A **hybrid approach** is needed: an intuitive “draw-and-animate” tool with core geoscience logic.
 
 ## 5.3 Advantages of Developing a Dedicated New Tool
 1. **User-Centric Interface** (simple “draw & move” approach).  
@@ -504,9 +546,6 @@ A **hybrid approach** is needed: an intuitive “draw-and-animate” tool with c
 3. **Dynamic Evolution** (animate entire planet histories).  
 4. **Web-Based Integration** (Django, HTMX, Rust→WASM).  
 5. **Community Involvement** (lower barrier than GPlates for hobbyists).
-
-## 5.4 Conclusion: The Relevance of a New Solution
-A **custom** application merges **intuitive map creation** with **authentic tectonic logic**, bridging the gap between specialized scientific software and purely artistic tools. It’s more than a novelty—serving as a platform for **learning**, **experimentation**, and **collaboration** in fictional geoscience.
 
 ---
 
