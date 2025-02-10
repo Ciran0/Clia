@@ -1,45 +1,6 @@
 ![CliaLogo](https://github.com/user-attachments/assets/cb4a758b-be16-4c11-acb8-e6f5d83f6856)
 
 ## Table of Contents
-1. [Problem and Context](#problem-and-context)  
-   1.1. [Background](#11-background)  
-   1.2. [The Gap in Existing Tools](#12-the-gap-in-existing-tools)  
-   1.3. [Stakeholders and Their Objectives](#13-stakeholders-and-their-objectives)  
-   1.4. [Key Challenges and Motivations](#14-key-challenges-and-motivations)  
-   1.5. [Project Rationale](#15-project-rationale)  
-2. [Identification of Major Agents](#identification-of-major-agents)  
-   2.1. [Potential Clients and Their Roles](#21-potential-clients-and-their-roles)  
-   2.2. [Tutors and Academic Support](#22-tutors-and-academic-support)  
-   2.3. [Broader User Community (Future End Users)](#23-broader-user-community-future-end-users)  
-   2.4. [Stakes and Functional Impact](#24-stakes-and-functional-impact)  
-3. [Identification of Functionalities](#identification-of-functionalities)  
-   3.1. [Basics](#31-basics)  
-   3.2. [Making & Moving Plates](#32-making--moving-plates)  
-   3.3. [Complex Plate Interactions](#33-complex-plate-interactions)  
-   3.4. [Marking Resulting Features](#34-marking-resulting-features)  
-   3.5. [Finishing & Exporting](#35-finishing--exporting)  
-4. [Methodology, Organization of the Project](#methodology-organization-of-the-project)  
-   4.1. [Minimum Viable Product (MVP)](#41-minimum-viable-product-mvp)  
-   4.2. [Phases of Development](#42-phases-of-development)  
-   4.3. [Agile Tooling](#43-agile-tooling)  
-   4.4. [Flexibility and Risk Management](#44-flexibility-and-risk-management)  
-5. [Position of the Solution](#position-of-the-solution)  
-   5.1. [Existing Solutions: Strengths, Weaknesses, and Gaps](#51-existing-solutions-strengths-weaknesses-and-gaps)  
-   5.2. [Why a New Solution?](#52-why-a-new-solution)  
-   5.3. [Advantages of Developing a Dedicated New Tool](#53-advantages-of-developing-a-dedicated-new-tool)  
-   5.4. [Conclusion: The Relevance of a New Solution](#54-conclusion-the-relevance-of-a-new-solution)  
-6. [Technical Analysis](#technical-analysis)  
-   6.1. [High-Level Architecture Overview](#61-high-level-architecture-overview)  
-   6.2. [Back-End Layer (Django + HTMX)](#62-back-end-layer-django--htmx)  
-   6.3. [3D Rendering & Front-End Visualization (Three.js)](#63-3d-rendering--front-end-visualization-threejs)  
-   6.4. [High-Performance Geometry: Rust → WebAssembly](#64-high-performance-geometry-rust--webassembly)  
-   6.5. [Supporting Tools & Methodologies](#65-supporting-tools--methodologies)  
-   6.6. [Comparison of Final Stack vs. Potential Alternatives](#66-comparison-of-final-stack-vs-potential-alternatives)  
-   6.7. [Justification of Each Final Choice](#67-justification-of-each-final-choice)  
-   6.8. [Potential Limitations & Future Enhancements](#68-potential-limitations--future-enhancements)  
-7. [Conception of the Solution](#conception-of-the-solution)  
-8. [Validation Strategy](#validation-strategy)  
-9. [Security & GDPR](#security--gdpr)
 
 ---
 
@@ -220,6 +181,12 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 - [ ] A continental crust option that allows the user to surroung the cratons with a new polygon
 - [ ] Check if the supercontinent correctly surrounds every cratons
+
+### Arbitrary editing
+> "As a user, I want to be able to create or modify features without having to justify it with techtonic history"
+
+- [ ] A "generic feature" option that allows the user to add custom features
+- [ ] The user can define how these new features interact with the tectonic process
 
 ### Flowlines and mid ocean ridges
 > "As a user, I want to see flowlines between diverging plates as well as the mid ocean ridge"
@@ -496,7 +463,6 @@ those are options that are not relevant in the actual simulation process but all
 
 # Position of the Solution
 
-
 ## 5.1 Existing Solutions:Weaknesses and Gaps
 - **GPlates** :
    - Scientific tool made for earth based techtonic .
@@ -551,12 +517,12 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
 
 # Technical Analysis
 
-## 6.0 Key Challenges and objectives
+## 6.1 Key Challenges and objectives
 - Balancing **Accessibility** and **Scientific accuracy** : This project should be available and usable by the largest number of worldbuilder while still beeing a real help to making scientifically robust geologic history. Things like the UI and the workflow should not hinder the accuracy of the tool while still having a small learning curve and encouraging an iterative process and experimentation.
 - Balancing **Performance** and **Complexity** : The hardware of the user should not be a roadblock to them using the service, it should feel fast in order to not stop the creative process. At the same time, things like manipulation and colision checks of polygons on a sphere can be complexe and computationally heavy. Solutions have to be found in order to manage those two aspects of the project.
 - Focusing on what is important : The premice of this project is quite complexe, therefore an effort should be made in order to avoid unnecessary complexity where it is possible.
 
-## 6.1 High-Level Architecture Overview
+## 6.2 High-Level Architecture Overview
 We need a browser-based solution that:
 1. **Renders a 3D globe** (Three.js) for interactive plate drawing.  
 2. **Computes geometry** in Rust→WASM for performance.  
@@ -586,27 +552,20 @@ A Python-based framework for robust data handling and quick partial updates:
 
 | **Layer**         | **Chosen**                         | **Alternatives**                            | **Reason**                                                 |
 |-------------------|------------------------------------|---------------------------------------------|------------------------------------------------------------|
-| Back End          | Django + HTMX                      | Flask, FastAPI, Node.js                     | Built-in admin, robust security, partial updates w/ HTMX.  |
+| Back End          | Django + HTMX                      | Flask, FastAPI, FastHtml, Node.js                     | Built-in admin, robust security, partial updates with HTMX.  |
 | Front End         | Three.js + minimal JS + HTMX        | React/Vue SPAs, Babylon.js, CesiumJS        | Straightforward 3D rendering, no heavy SPA needed.         |
 | Geometry          | Rust → WASM                        | C/C++ → WASM, AssemblyScript, Go → WASM     | Safe concurrency, performance, mature Rust→JS ecosystem.   |
 | 3D Visualization  | Three.js                           | Babylon.js, raw WebGL, other 3D engines     | Large community, flexible, examples for custom geometry.   |
 
 ## 6.7 Justification of Each Final Choice
 1. **Django + HTMX**: Quick to set up, proven reliability, partial updates.  
-2. **Rust → WASM**: Safe, high-performance math for plate-tectonic logic.  
+2. **Rust → WASM**: Safe, high-performance math for plate-tectonic logic, good integrated web assembly toolchain
 3. **Three.js**: Well-documented 3D library for a custom globe approach.  
 
 ## 6.8 Potential Limitations & Future Enhancements
-- **Large Data Sets**: Could require LOD strategies.  
-- **Collaboration**: Real-time might need Django Channels or websockets.  
+- **Web assembly to js pipeline** : with a lot of frequent updates the serialization/deserialization of data between javascript and the web assembly might quickly become a bottleneck, the use of shared memory and webworkers might help alliviate this problem
+- **Collaboration**: Real-time collaboration might need Django Channels or websockets.  
 - **WebGPU**: Future improvement for massive polygons or advanced rendering.
-
----
-
-# Conception of the Solution
-
-
----
 
 # Validation Strategy
 1. **User Types**: Validate with beginner worldbuilders vs. advanced tectonics enthusiasts.  
@@ -619,4 +578,4 @@ A Python-based framework for robust data handling and quick partial updates:
 # Security & GDPR
 - **User Data**: Only minimal user info (e.g., logins) plus project data (polygons, timestamps).  
 - **Protection**: Django’s default CSRF, session security, HTTPS.  
-- **GDPR Considerations**: If storing personal data, provide user consent forms, data deletion on request, and relevant disclaimers.
+- **GDPR Considerations**: If storing personal data, provide user consent forms, data deletion on request, and relevant disclaimers. It might be possible to allow the user to only save their project locally if they want to keep complete ownership of their project
