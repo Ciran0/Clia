@@ -1,93 +1,174 @@
-![CliaLogo](https://github.com/user-attachments/assets/cb4a758b-be16-4c11-acb8-e6f5d83f6856)
-<!-- mtoc-start -->
+# Table of Contents
 
-* [Problem and Context](#problem-and-context)
-  * [1.1 Background](#11-background)
-  * [1.2 The Gap in Existing Tools](#12-the-gap-in-existing-tools)
-  * [1.3 Project Overview](#13-project-overview)
-* [Identification of Major Agents](#identification-of-major-agents)
-  * [2.1 Overview of main agents](#21-overview-of-main-agents)
-  * [2.2 Potential Clients and Their Roles](#22-potential-clients-and-their-roles)
-* [Feature analysis](#feature-analysis)
-  * [3.1 Basics](#31-basics)
-    * [User account management](#user-account-management)
-    * [Startup & Project Creation](#startup--project-creation)
-    * [Saving the Project](#saving-the-project)
-    * [Load Project](#load-project)
-  * [3.2 Drawing on the sphere](#32-drawing-on-the-sphere)
-    * [Node by node drawing](#node-by-node-drawing)
-    * [Node by node editing](#node-by-node-editing)
-    * [Logic feature editing](#logic-feature-editing)
-    * [Pencil drawing](#pencil-drawing)
-  * [3.3 Project, feature data and tools](#33-project-feature-data-and-tools)
-    * [Measuring tool](#measuring-tool)
-    * [Tracking of various informations of the project](#tracking-of-various-informations-of-the-project)
-    * [Tracking of various information of different feature](#tracking-of-various-information-of-different-feature)
-    * [Feature history](#feature-history)
-  * [3.4 Making & Moving Plates](#34-making--moving-plates)
-    * [Creating initial cratons](#creating-initial-cratons)
-    * [Creating the initial supercontinent](#creating-the-initial-supercontinent)
-    * [Arbitrary editing](#arbitrary-editing)
-    * [Flowlines and mid ocean ridges](#flowlines-and-mid-ocean-ridges)
-    * [Defining Rifts](#defining-rifts)
-    * [adding failed rifts](#adding-failed-rifts)
-    * [Splitting a Feature](#splitting-a-feature)
-    * [Making the plates drift](#making-the-plates-drift)
-    * [Adding Ocean Crust](#adding-ocean-crust)
-    * [Adding subduction zones](#adding-subduction-zones)
-    * [Subduction of oceanic crust and other features](#subduction-of-oceanic-crust-and-other-features)
-  * [3.5 Colliding](#35-colliding)
-    * [Collision detection](#collision-detection)
-    * [Small collision management](#small-collision-management)
-    * [Major collision management](#major-collision-management)
-  * [3.6 Feature indications](#36-feature-indications)
-    * [Island Arcs indication](#island-arcs-indication)
-    * [Hotspot placement and trail indication](#hotspot-placement-and-trail-indication)
-    * [Large ignious provinces](#large-ignious-provinces)
-    * [Orogenies indications](#orogenies-indications)
-  * [3.7 Static tools](#37-static-tools)
-    * [automatic oceanic shelf carving](#automatic-oceanic-shelf-carving)
-    * [dynamic feature detailing](#dynamic-feature-detailing)
-    * [dynamic topology generation](#dynamic-topology-generation)
-    * [Expanded topologic tools](#expanded-topologic-tools)
-  * [3.8 Options and export](#38-options-and-export)
-    * [switch between 3D and projection](#switch-between-3d-and-projection)
-    * [change color settings](#change-color-settings)
-    * [Importing reference](#importing-reference)
-    * [Final Display Adjustments](#final-display-adjustments)
-    * [Exporting Maps & Timelapse](#exporting-maps--timelapse)
-* [Technical Analysis](#technical-analysis)
-  * [4.1 Key Challenges and objectives](#41-key-challenges-and-objectives)
-  * [4.2 High-Level Architecture Overview](#42-high-level-architecture-overview)
-  * [4.2 Back-End Layer (Django + HTMX)](#42-back-end-layer-django--htmx)
-  * [4.3 3D Rendering & Front-End Visualization (Three.js)](#43-3d-rendering--front-end-visualization-threejs)
-  * [4.4 High-Performance Geometry: Rust → WebAssembly](#44-high-performance-geometry-rust--webassembly)
-  * [4.5 Supporting Tools & Methodologies](#45-supporting-tools--methodologies)
-  * [4.6 Comparison of Final Stack vs. Potential Alternatives](#46-comparison-of-final-stack-vs-potential-alternatives)
-  * [4.7 Justification of Each Final Choice](#47-justification-of-each-final-choice)
-  * [4.8 Potential Limitations et Future Enhancements](#48-potential-limitations-et-future-enhancements)
-* [Position of the Solution](#position-of-the-solution)
-  * [5.1 Existing Solutions:Weaknesses and Gaps](#51-existing-solutionsweaknesses-and-gaps)
-    * [Improvements over GPlates](#improvements-over-gplates)
-  * [5.3 Advantages of Developing a Dedicated New Tool](#53-advantages-of-developing-a-dedicated-new-tool)
-* [Methodology, Organization of the Project](#methodology-organization-of-the-project)
-  * [5.1 Minimum Viable Product : Barebone vector animation tool on a sphere](#51-minimum-viable-product--barebone-vector-animation-tool-on-a-sphere)
-  * [5.2 Phases of Development](#52-phases-of-development)
-    * [Phase 1: Project Setup & MVP Definition](#phase-1-project-setup--mvp-definition)
-    * [Phase 2: MVP Implementation](#phase-2-mvp-implementation)
-    * [Phase 3: Polished MVP and advanced vector tooling](#phase-3-polished-mvp-and-advanced-vector-tooling)
-    * [Phase 4: tectonic featureset implementation](#phase-4-tectonic-featureset-implementation)
-    * [Phase 5: Automatic feature indication and smarter collisions](#phase-5-automatic-feature-indication-and-smarter-collisions)
-    * [Phase 6: Advanced project settings, export and tools](#phase-6-advanced-project-settings-export-and-tools)
-    * [Phase 7: Wrap-up of Version 1.0](#phase-7-wrap-up-of-version-10)
-    * [Phase 8: Post tfe features](#phase-8-post-tfe-features)
-  * [5.3 Agile Tooling](#53-agile-tooling)
-  * [5.4 Flexibility and Risk Management](#54-flexibility-and-risk-management)
-* [Validation Strategy](#validation-strategy)
-* [Security et GDPR](#security-et-gdpr)
+- [Problem and Context](#problem-and-context)
+  - [1.1 Background](#1.1-background)
+  - [1.2 The Gap in Existing Tools](#1.2-the-gap-in-existing-tools)
+  - [1.3 Project Overview](#1.3-project-overview)
+- [Identification of Major Agents](#identification-of-major-agents)
+  - [2.1 Overview of main agents](#2.1-overview-of-main-agents)
+  - [2.2 Potential Clients and Their Roles](#2.2-potential-clients-and-their-roles)
+- [Feature analysis](#feature-analysis)
+  - [3.1 Basics](#3.1-basics)
+    - [User account management](#user-account-management)
+    - [Startup & Project Creation](#startup-.-project-creation)
+    - [Saving the Project](#saving-the-project)
+    - [Load Project](#load-project)
+  - [3.2 Drawing on the sphere](#3.2-drawing-on-the-sphere)
+    - [Node by node drawing](#node-by-node-drawing)
+    - [Node by node editing](#node-by-node-editing)
+    - [Logic feature editing](#logic-feature-editing)
+    - [Pencil drawing](#pencil-drawing)
+  - [3.3 Project, feature data and tools](#3.3-project.-feature-data-and-tools)
+    - [Measuring tool](#measuring-tool)
+    - [Tracking of various informations of the project](#tracking-of-various-informations-of-the-project)
+    - [Tracking of various information of different feature](#tracking-of-various-information-of-different-feature)
+    - [Feature history](#feature-history)
+  - [3.4 Making & Moving Plates](#3.4-making-.-moving-plates)
+    - [Creating initial cratons](#creating-initial-cratons)
+    - [Creating the initial supercontinent](#creating-the-initial-supercontinent)
+    - [Arbitrary editing](#arbitrary-editing)
+    - [Flowlines and mid ocean ridges](#flowlines-and-mid-ocean-ridges)
+    - [Defining Rifts](#defining-rifts)
+    - [adding failed rifts](#adding-failed-rifts)
+    - [Splitting a Feature](#splitting-a-feature)
+    - [Making the plates drift](#making-the-plates-drift)
+    - [Adding Ocean Crust](#adding-ocean-crust)
+    - [Adding subduction zones](#adding-subduction-zones)
+    - [Subduction of oceanic crust and other features](#subduction-of-oceanic-crust-and-other-features)
+  - [3.5 Colliding](#3.5-colliding)
+    - [Collision detection](#collision-detection)
+    - [Small collision management](#small-collision-management)
+    - [Major collision management](#major-collision-management)
+  - [3.6 Feature indications](#3.6-feature-indications)
+    - [Island Arcs indication](#island-arcs-indication)
+    - [Hotspot placement and trail indication](#hotspot-placement-and-trail-indication)
+    - [Large ignious provinces](#large-ignious-provinces)
+    - [Orogenies indications](#orogenies-indications)
+  - [3.7 Static tools](#3.7-static-tools)
+    - [automatic oceanic shelf carving](#automatic-oceanic-shelf-carving)
+    - [dynamic feature detailing](#dynamic-feature-detailing)
+    - [dynamic topology generation](#dynamic-topology-generation)
+    - [Expanded topologic tools](#expanded-topologic-tools)
+  - [3.8 Options and export](#3.8-options-and-export)
+    - [switch between 3D and projection](#switch-between-3d-and-projection)
+    - [change color settings](#change-color-settings)
+    - [Importing reference](#importing-reference)
+    - [Final Display Adjustments](#final-display-adjustments)
+    - [Exporting Maps & Timelapse](#exporting-maps-.-timelapse)
+- [Technical Analysis](#technical-analysis)
+  - [4.1 Key Challenges and objectives](#4.1-key-challenges-and-objectives)
+  - [4.2 High-Level Architecture Overview](#4.2-high-level-architecture-overview)
+  - [4.3 Back-End Layer (Django + HTMX)](#4.3-back-end-layer-.django-.-htmx.)
+  - [4.4 3D Rendering & Front-End Visualization (Three.js)](#4.4-3d-rendering-.-front-end-visualization-.three.js.)
+  - [4.5 High-Performance Geometry: Rust → WebAssembly](#4.5-high-performance-geometry.-rust-...-webassembly)
+  - [4.6 Supporting Tools & Methodologies](#4.6-supporting-tools-.-methodologies)
+  - [4.7 Comparison of Final Stack vs. Potential Alternatives](#4.7-comparison-of-final-stack-vs.-potential-alternatives)
+  - [4.8 Justification of Each Final Choice](#4.8-justification-of-each-final-choice)
+  - [4.9 Potential Limitations et Future Enhancements](#4.9-potential-limitations-et-future-enhancements)
+- [Position of the Solution](#position-of-the-solution)
+  - [5.1 Existing Solutions:Weaknesses and Gaps](#5.1-existing-solutions.weaknesses-and-gaps)
+    - [Improvements over GPlates](#improvements-over-gplates)
+  - [5.2 Advantages of Developing a Dedicated New Tool](#5.2-advantages-of-developing-a-dedicated-new-tool)
+- [Methodology, Organization of the Project](#methodology.-organization-of-the-project)
+  - [6.1 Minimum Viable Product : Barebone vector animation tool on a sphere](#6.1-minimum-viable-product-.-barebone-vector-animation-tool-on-a-sphere)
+  - [6.2 Phases of Development](#6.2-phases-of-development)
+    - [Phase 1: Project Setup & MVP Definition](#phase-1.-project-setup-.-mvp-definition)
+    - [Phase 2: MVP Implementation](#phase-2.-mvp-implementation)
+    - [Phase 3: Polished MVP and advanced vector tooling](#phase-3.-polished-mvp-and-advanced-vector-tooling)
+    - [Phase 4: tectonic featureset implementation](#phase-4.-tectonic-featureset-implementation)
+    - [Phase 5: Automatic feature indication and smarter collisions](#phase-5.-automatic-feature-indication-and-smarter-collisions)
+    - [Phase 6: Advanced project settings, export and tools](#phase-6.-advanced-project-settings.-export-and-tools)
+    - [Phase 7: Wrap-up of Version 1.0](#phase-7.-wrap-up-of-version-1.0)
+    - [Phase 8: Post tfe features](#phase-8.-post-tfe-features)
+  - [6.3 Agile Tooling](#6.3-agile-tooling)
+  - [6.4 Flexibility and Risk Management](#6.4-flexibility-and-risk-management)
+- [Validation Strategy](#validation-strategy)
+- [Security et GDPR](#security-et-gdpr)
 
-<!-- mtoc-end -->
----
+- [Problem and Context](#problem-and-context)
+  - [1.1 Background](#11-background)
+  - [1.2 The Gap in Existing Tools](#12-the-gap-in-existing-tools)
+  - [1.3 Project Overview](#13-project-overview)
+- [Identification of Major Agents](#identification-of-major-agents)
+  - [2.1 Overview of main agents](#21-overview-of-main-agents)
+  - [2.2 Potential Clients and Their Roles](#22-potential-clients-and-their-roles)
+- [Feature analysis](#feature-analysis)
+  - [3.1 Basics](#31-basics)
+    - [User account management](#user-account-management)
+    - [Startup & Project Creation](#startup--project-creation)
+    - [Saving the Project](#saving-the-project)
+    - [Load Project](#load-project)
+  - [3.2 Drawing on the sphere](#32-drawing-on-the-sphere)
+    - [Node by node drawing](#node-by-node-drawing)
+    - [Node by node editing](#node-by-node-editing)
+    - [Logic feature editing](#logic-feature-editing)
+    - [Pencil drawing](#pencil-drawing)
+  - [3.3 Project, feature data and tools](#33-project-feature-data-and-tools)
+    - [Measuring tool](#measuring-tool)
+    - [Tracking of various informations of the project](#tracking-of-various-informations-of-the-project)
+    - [Tracking of various information of different feature](#tracking-of-various-information-of-different-feature)
+    - [Feature history](#feature-history)
+  - [3.4 Making & Moving Plates](#34-making--moving-plates)
+    - [Creating initial cratons](#creating-initial-cratons)
+    - [Creating the initial supercontinent](#creating-the-initial-supercontinent)
+    - [Arbitrary editing](#arbitrary-editing)
+    - [Flowlines and mid ocean ridges](#flowlines-and-mid-ocean-ridges)
+    - [Defining Rifts](#defining-rifts)
+    - [adding failed rifts](#adding-failed-rifts)
+    - [Splitting a Feature](#splitting-a-feature)
+    - [Making the plates drift](#making-the-plates-drift)
+    - [Adding Ocean Crust](#adding-ocean-crust)
+    - [Adding subduction zones](#adding-subduction-zones)
+    - [Subduction of oceanic crust and other features](#subduction-of-oceanic-crust-and-other-features)
+  - [3.5 Colliding](#35-colliding)
+    - [Collision detection](#collision-detection)
+    - [Small collision management](#small-collision-management)
+    - [Major collision management](#major-collision-management)
+  - [3.6 Feature indications](#36-feature-indications)
+    - [Island Arcs indication](#island-arcs-indication)
+    - [Hotspot placement and trail indication](#hotspot-placement-and-trail-indication)
+    - [Large ignious provinces](#large-ignious-provinces)
+    - [Orogenies indications](#orogenies-indications)
+  - [3.7 Static tools](#37-static-tools)
+    - [automatic oceanic shelf carving](#automatic-oceanic-shelf-carving)
+    - [dynamic feature detailing](#dynamic-feature-detailing)
+    - [dynamic topology generation](#dynamic-topology-generation)
+    - [Expanded topologic tools](#expanded-topologic-tools)
+  - [3.8 Options and export](#38-options-and-export)
+    - [switch between 3D and projection](#switch-between-3d-and-projection)
+    - [change color settings](#change-color-settings)
+    - [Importing reference](#importing-reference)
+    - [Final Display Adjustments](#final-display-adjustments)
+    - [Exporting Maps & Timelapse](#exporting-maps--timelapse)
+- [Technical Analysis](#technical-analysis)
+  - [4.1 Key Challenges and objectives](#41-key-challenges-and-objectives)
+  - [4.2 High-Level Architecture Overview](#42-high-level-architecture-overview)
+  - [4.3 Back-End Layer (Django + HTMX)](#43-back-end-layer-django--htmx)
+  - [4.4 3D Rendering & Front-End Visualization (Three.js)](#44-3d-rendering--front-end-visualization-threejs)
+  - [4.5 High-Performance Geometry: Rust → WebAssembly](#45-high-performance-geometry-rust--webassembly)
+  - [4.6 Supporting Tools & Methodologies](#46-supporting-tools--methodologies)
+  - [4.7 Comparison of Final Stack vs. Potential Alternatives](#47-comparison-of-final-stack-vs-potential-alternatives)
+  - [4.8 Justification of Each Final Choice](#48-justification-of-each-final-choice)
+  - [4.9 Potential Limitations et Future Enhancements](#49-potential-limitations-et-future-enhancements)
+- [Position of the Solution](#position-of-the-solution)
+  - [5.1 Existing Solutions:Weaknesses and Gaps](#51-existing-solutionsweaknesses-and-gaps)
+    - [Improvements over GPlates](#improvements-over-gplates)
+  - [5.2 Advantages of Developing a Dedicated New Tool](#52-advantages-of-developing-a-dedicated-new-tool)
+- [Methodology, Organization of the Project](#methodology-organization-of-the-project)
+  - [6.1 Minimum Viable Product : Barebone vector animation tool on a sphere](#61-minimum-viable-product--barebone-vector-animation-tool-on-a-sphere)
+  - [6.2 Phases of Development](#62-phases-of-development)
+    - [Phase 1: Project Setup & MVP Definition](#phase-1-project-setup--mvp-definition)
+    - [Phase 2: MVP Implementation](#phase-2-mvp-implementation)
+    - [Phase 3: Polished MVP and advanced vector tooling](#phase-3-polished-mvp-and-advanced-vector-tooling)
+    - [Phase 4: tectonic featureset implementation](#phase-4-tectonic-featureset-implementation)
+    - [Phase 5: Automatic feature indication and smarter collisions](#phase-5-automatic-feature-indication-and-smarter-collisions)
+    - [Phase 6: Advanced project settings, export and tools](#phase-6-advanced-project-settings-export-and-tools)
+    - [Phase 7: Wrap-up of Version 1.0](#phase-7-wrap-up-of-version-10)
+    - [Phase 8: Post tfe features](#phase-8-post-tfe-features)
+  - [6.3 Agile Tooling](#63-agile-tooling)
+  - [6.4 Flexibility and Risk Management](#64-flexibility-and-risk-management)
+- [Validation Strategy](#validation-strategy)
+- [Security et GDPR](#security-et-gdpr)
 
 # Problem and Context
 
@@ -464,26 +545,26 @@ We need a browser-based solution that:
 3. **Stores data** in Django, employing HTMX for partial page updates.  
 4. **Scales** with agile increments.
 
-## 4.2 Back-End Layer (Django + HTMX)
+## 4.3 Back-End Layer (Django + HTMX)
 A Python-based framework for robust data handling and quick partial updates:
 - **Django**: Admin, ORM, security.  
 - **HTMX**: Enables partial HTML updates with minimal JavaScript overhead.
 
-## 4.3 3D Rendering & Front-End Visualization (Three.js)
+## 4.4 3D Rendering & Front-End Visualization (Three.js)
 - **Three.js** for an interactive 3D globe.  
 - Large community, flexible scene management, easy to integrate with HTML/JS.
 
-## 4.4 High-Performance Geometry: Rust → WebAssembly
+## 4.5 High-Performance Geometry: Rust → WebAssembly
 - **WebAssembly** for near-native performance in numeric tasks.  
 - **Rust** ensures memory safety and strong tooling.  
 - Handles polygon splitting, Euler rotations, collisions, etc.
 
-## 4.5 Supporting Tools & Methodologies
+## 4.6 Supporting Tools & Methodologies
 - **Database & ORM**: Likely PostgreSQL for multi-user or advanced queries.  
 - **Synchronous Django** acceptable for a single-user or small group.  
 - **Security**: Django’s built-in session/auth + standard web best practices.
 
-## 4.6 Comparison of Final Stack vs. Potential Alternatives
+## 4.7 Comparison of Final Stack vs. Potential Alternatives
 
 | **Layer**         | **Chosen**                         | **Alternatives**                            | **Reason**                                                 |
 |-------------------|------------------------------------|---------------------------------------------|------------------------------------------------------------|
@@ -492,12 +573,12 @@ A Python-based framework for robust data handling and quick partial updates:
 | Geometry          | Rust → WASM                        | C/C++ → WASM, AssemblyScript, Go → WASM     | Safe concurrency, performance, mature Rust→JS ecosystem.   |
 | 3D Visualization  | Three.js                           | Babylon.js, raw WebGL, other 3D engines     | Large community, flexible, examples for custom geometry.   |
 
-## 4.7 Justification of Each Final Choice
+## 4.8 Justification of Each Final Choice
 1. **Django + HTMX**: Quick to set up, proven reliability, partial updates.  
 2. **Rust → WASM**: Safe, high-performance math for plate-tectonic logic, good integrated web assembly toolchain
 3. **Three.js**: Well-documented 3D library for a custom globe approach.  
 
-## 4.8 Potential Limitations et Future Enhancements
+## 4.9 Potential Limitations et Future Enhancements
 - **Web assembly to js pipeline** : with a lot of frequent updates the serialization/deserialization of data between javascript and the web assembly might quickly become a bottleneck, the use of shared memory and webworkers might help alliviate this problem
 - **Collaboration**: Real-time collaboration might need Django Channels or websockets.  
 - **WebGPU**: Future improvement for massive polygons or advanced rendering.
@@ -549,7 +630,7 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
    - Informing the user of where features should go based on their decisions (subduction zones, island arcs, orogenies)
    - automatically delete subducted features
 
-## 5.3 Advantages of Developing a Dedicated New Tool
+## 5.2 Advantages of Developing a Dedicated New Tool
 1. **User-Centric Interface** (simple “draw & move” approach).  
 2. **Focus on Fictional Workflows** (imagined tectonic histories, quick plate splits).  
 3. **Dynamic Evolution** (animate entire planet histories).  
@@ -560,7 +641,7 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
 
 # Methodology, Organization of the Project
 
-## 5.1 Minimum Viable Product : Barebone vector animation tool on a sphere
+## 6.1 Minimum Viable Product : Barebone vector animation tool on a sphere
 
 1. **3D Globe Visualization**  
    - Basic globe in Three.js
@@ -587,7 +668,7 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
    - Users can sign up, log ing ...
    - A new project can be created, named ...
 
-## 5.2 Phases of Development
+## 6.2 Phases of Development
 
 ### Phase 1: Project Setup & MVP Definition
 - **Goals**: 
@@ -637,7 +718,7 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
    - support
    - Implementation of advanced options and tooling that got left out from the 1.0
 
-## 5.3 Agile Tooling
+## 6.3 Agile Tooling
 
 - **Git + GitHub**:  
   - Branching, pull requests, issues, GitHub Projects.  
@@ -647,7 +728,7 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
   - Each phase yields a working build.  
   - Re-prioritize tasks as needed.
 
-## 5.4 Flexibility and Risk Management
+## 6.4 Flexibility and Risk Management
 - **Agile, incremental** approach allows re-scoping if complexities arise (math, performance).  
 - MVP ensures a baseline deliverable; phases accommodate new ideas or user feedback.
 
