@@ -228,6 +228,52 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 
 # Feature analysis
 
+## 3.0 Overview table
+
+|Code|Name|Importance|Complexity|
+| --- | --- | --- | --- |
+|Bas1|User account management|Must|very low|
+|Bas2|Startup & Project Creation|Critical|Low|
+|Bas3|Saving the project|Must|Low|
+|Bas4|Load project|Must|Low|
+|Draw1|Node by Node drawing|Critical|Medium|
+|Draw2|Node by Node editing|Critical|Medium|
+|Draw3|Logic feature editing|Should|Medium-high|
+|Draw4|Pencil drawing|Nice|Medium|
+|PFDT1|Measuring tool|Should|Medium-low|
+|PFDT2|Tracking of various informations of the project|Should|Low|
+|PFDT3|Tracking of various informations of different feature|Should|Low|
+|PFDT4|Feature history|Nice|Medium-high|
+|MM1|Creating initial cratons|Should|High|
+|MM2|Creating the initial supercontinent|Critical|High|
+|MM3|Arbitrary editing|Should|high|
+|MM4|Flowlines and mid ocean ridges|Nice|Crazy|
+|MM5|Defining Rifts|Should|High|
+|MM6|Adding failed rifts|Nice|Pretty High|
+|MM7|Splitting a feature|Should|Crazy|
+|MM8|Making the plates drift|Critical|Very high|
+|MM9|Movement Preview|Should|Crazy|
+|MM10|Adding Ocean Crust|Nice|Crazy|
+|MM11|Adding subduction zones|Should|High|
+|MM12|Subduction of oceanic crust and other features|Nice|F it we ball|
+|Col1|Collision detection|Should|Crazy|
+|Col2|Small collision management|Nice|Crazy|
+|Col3|Major collision management|Nice|Crazy|
+|FIn1|Island Arcs indication|Nice|Very high|
+|FIn2|Hotspot placement and trail indication|Should|High|
+|FIn3|Large ignious provinces|Should|Very high|
+|FIn4|Orogenies indications|Nice|I am sorry|
+|ST1|automatic oceanic shelf carving|Optional|Very high|
+|ST2|dynamic feature detailing|Optional|Very high|
+|ST3|dynamic topology generation|Optional|Thinking about it is a bad idea|
+|ST4|Expanded topologic tools|Nice|Pretty high|
+|OE1|switching between 3D and projection|Must|High|
+|OE2|change color settings|Should|Medium|
+|OE3|Importing reference|Nice|Medium|
+|OE4|Final Display Adjustments|Should|Low|
+|OE5|Exporting Maps & Timeline|Critical|Medium high|
+
+
 ## 3.1 Basics
 
 ### User account management
@@ -264,7 +310,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] Create a new entry in the database if the project is new
 
 
-**Importance**: Should have
+**Importance**: Must have
 **Complexity**: Low
 
 ### Load Project
@@ -274,7 +320,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] A ‘Load project’ action to open an existing project
 - [ ] Displays a list of the user's current projects
 
-**Importance**: Should have
+**Importance**: Must have
 **Complexity**: Low
 
 ---
@@ -301,7 +347,7 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 ### Pencil drawing
 > "As a user, I want to be able to draw a line on the globe and have it automatically convert in a serie of points"
 
-**Importance**: Good to have
+**Importance**: Nice to have
 **Complexity**: Medium
 
 ---
@@ -313,11 +359,17 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 **Acceptance Criteria**
 - [ ] the measuring tool can be used to acurately measure distances on the sphere
 
+**Importance**: Should have
+**Complexity**: Medium-low
+
 ### Tracking of various informations of the project
 > "As a user, I want to be able to track multiple informations about the world"
 
 **Acceptance Criteria**
 - [ ] Tracking the total land coverage of the planet
+
+**Importance**: Should have
+**Complexity**: Low
 
 ### Tracking of various information of different feature
 > "As a user, I want to be able to click on a feature to see multiple informations about it"
@@ -328,8 +380,14 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] Get the area of the feature (if pertinent)
 - [ ] Get various geometric informations about the feature
 
+**Importance**: Should have
+**Complexity**: low
+
 ### Feature history
 > "As a user, I want to be able to access a small history of the various events that have happened to a feature"
+
+**Importance**: Nice to have
+**Complexity**: medium-high
 
 ---
 ## 3.4 Making & Moving Plates
@@ -341,17 +399,26 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] A craton option that allows the user to add a new craton on the sphere
 - [ ] Confirming the shape of the craton
 
+**Importance**: Should have
+**Complexity**: high
+
 ### Creating the initial supercontinent
 > "As a user, I want to be able to surround the cratons with the initial continental crust"
 
 - [ ] A continental crust option that allows the user to surround the cratons with a new polygon
 - [ ] Check if the supercontinent correctly surrounds every cratons
 
+**Importance**: Critical
+**Complexity**: high
+
 ### Arbitrary editing
 > "As a user, I want to be able to create or modify features without having to justify it with tectonic history"
 
 - [ ] A "generic feature" option that allows the user to add custom features
 - [ ] The user can define how these new features interact with the tectonic process
+
+**Importance**: Should have
+**Complexity**: high
 
 ### Flowlines and mid ocean ridges
 > "As a user, I want to see flowlines between diverging plates as well as the mid ocean ridge"
@@ -361,6 +428,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] notify the user if the flowlines cross each other (bad practices)
 - [ ] keep track of the mid ocean ridge as the plates moves
 
+**Importance**: Nice to have
+**Complexity**: Crazy
+
 ### Defining Rifts
 > “As a user, I want to draw a rift line across a continent so it can split into two separate plates.”
 
@@ -369,6 +439,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] extrapolate the polyline to features that needs to be split too (island arcs, oceanic plate)
 - [ ] check that the rift doesn't goes through any cratons
 
+**Importance**: Should have
+**Complexity**: high
+
 ### adding failed rifts
 > "As a user, I want to draw a polyline coming from either a node of a rift or the side of a plate to define a failed rift. This failed rift can be used as the template for full rifts"
 
@@ -376,11 +449,16 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] I can draw a polyline with a node of a continental plate or rift as starting point
 - [ ] I can reactivate a failed rift and extend it into a full rift
 
+**Importance**: Nice to have
+**Complexity**: Pretty high
 ### Splitting a Feature
 > “As a user, I want to split an existing plate along the rift line so each side can be considered as different plates and move independently"
 
 **Acceptance Criteria**:  
 - [ ] the two split plates are considered as two and move independently
+
+**Importance**: Should have
+**Complexity**: Crazy
 
 ### Making the plates drift
 > "As a user, I want to define a direction, rotation and a speed in order to make a plate drift over a set period of time"
@@ -388,6 +466,19 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 **Acceptance Criteria**:
 - [ ] inputing a speed, a rotation, a direction and a length of time to correctly displaces the plate
 - [ ] every features that are associated to the plate move in sinc with the plate
+
+**Importance**: Critical
+**Complexity**: Very high
+
+### Movement preview
+> "As a user, I want to be able to preview the location of the plate while I input the tranformations, as a shadow of the continent or as preview lines"
+
+**Acceptance Criteria**:
+- [ ] While the user is inputing the tranformations, an accurate preview of the result is displayed
+- [ ] The preview is reactive and accurate
+
+**Importance**: Should have
+**Complexity**: Crazy
 
 ### Adding Ocean Crust
 > “As a user, i want the space between diverging plates to be filled with oceanic crust"
@@ -397,17 +488,26 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] the new oceanic crust gets added to the plate on their side of the mid ocean ridge
 - [ ] the age of the oceanic crust is kept track off
 
+**Importance**: Nice to have
+**Complexity**: crazy
+
 ### Adding subduction zones
 > "As a user, I want to mark convergent boundaries as subduction zones that will inform the movement of the plates"
 
 **Acceptance Criteria**:  
 - [ ] I can draw a polyline that is considered as a subduction zone
 
+**Importance**: Should have
+**Complexity**: high
+
 ### Subduction of oceanic crust and other features
 > "As a user, I want to see features like the oceanic crust disappear as they get subducted"
 
 **Acceptance Criteria**:
 - when a feature that would not create collisions (oceanic plates, mid ocean rifts ...) crosses a subduction zone, it's geomtry gets updated in order to give the impression that it "dissapears" under the subduction zone
+
+**Importanced**: Nice to have
+**Complexity**: F it we ball
 
 ---
 ## 3.5 Colliding
@@ -419,6 +519,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] the time of the collision is recorded
 - [ ] the animation creates a step at the time of the collision
 
+**Importance**: Should have
+**Complexity**: Crazy
+
 ### Small collision management
 > "As a user, when a minor collision occurs (island arc vs plate), i want the island arc to automatically be added as "accreted terrain" to the plate"
 
@@ -427,6 +530,8 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] the new accreted terrain is added as a feature of the colliding plate
 - [ ] the surface of the accreted terrain correspond to the expected surface of the island arc at the time of collision
 
+**Importance**: Nice to have
+**Complexity**: Crazy
 ### Major collision management
 >"As a user, when a major collision occurs (plate vs plate), i want to be able to keep track of the features that "disappear in this collision" as well as manage the various deformations of geometry that occurs in the collision."
 
@@ -435,6 +540,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] a zone of orogenie is suggested 
 - [ ] the user can define a collision rift between the two colliding plates
 - [ ] the user can modify the geometry of the newly formed plate
+
+**Importance**: Nice to have
+**Complexity**: Crazy
 
 ---
 ## 3.6 Feature indications
@@ -446,12 +554,18 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] a zone is correctly displayed behind a subduction zone to indicate the location of expected island arcs
 - [ ] with the simulation the area of the zone (in km^2) correctly evolves based on the formula : length of the IA (km) x age of IA (in Mya))/2
 
+**Importance**: Nice to have
+**Complexity**: Very high
+
 ### Hotspot placement and trail indication
 > "As a user, I want to be able to place hotspots on the globe and to see the zone of the expected trails of the volcanic activity"
 
 **Acceptance Criteria**:
 - [ ] I can correctly see the path of volcanic activity left by the hotspot
 - [ ] The expected location of remaining geologic traces of the hotspot are indicated with a sort of "teardrop" shape
+
+**Importance**: Should have
+**Complexity**: High
 
 ### Large ignious provinces
 > "As a user, I want to be able to draw a large ignious province and choose if the province is active or inactive"
@@ -461,6 +575,9 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] the large ignious province can be set as active or inactive
 - [ ] the age of the ignious province is remembered
 
+**Importance**: Should have
+**Complexity**: Very high
+
 ### Orogenies indications
 > "As a user, I want to be informed of the expected locations of the various orogenies of the plates based on their movements"
 
@@ -469,21 +586,49 @@ The **lack of a specialized tool** for **fictional geologic history animation** 
 - [ ] active/passive state of the orogenies can be set
 - [ ] the age of the orogenies is kept track of, as well as the time since the orogenie was active
 
+**Importance**: Nice to have
+**Complexity**: I am sorry
+
 ## 3.7 Static tools
 those are options that are not relevant in the actual simulation process but allow the user to polish a specific state of the map.
 
 ### automatic oceanic shelf carving
 > "As a user, I want to have an option to autmatically carve the appropriate depth into the oceanic shelf in order to have a more accurate picture of the actual landmasses
 
+**Acceptance Criteria**:
+- [ ] The automatic oceanic shelf carving creates a new layer
+- [ ] The result of the carving is correct
+
+**Importance**: Optional
+**Complexity**: Very high
+
 ### dynamic feature detailing
 > "As a user, I want to be able to easilly detail the features of my project"
+
+**Acceptance Criteria**:
+- [ ] the feature detailing adds nodes to edges to make them more iteresting and natural
+- [ ] the ammount of detailing can be managed
+
+**Importance**: Optional
+**Complexity**: Very high
+
 
 ### dynamic topology generation
 > "As a user, I want the application to be able to give me a rough idea of the topology of the continents and the ocean 
 
+**Acceptance Criteria**:
+
+**Importance**: Optional
+**Complexity**: thinking about it is a bad idea
+
 ### Expanded topologic tools
 > "As a user, I want to be able to draw the topology of my map directly on the sphere with a set of vector tools"
 
+**Acceptance Criteria**:
+- [ ] a lot of cool stuff
+
+**Importance**: Nice to have
+**Complexity**: Pretty high
 
 ---
 ## 3.8 Options and export
@@ -496,6 +641,9 @@ those are options that are not relevant in the actual simulation process but all
 - [ ] change the type of projection
 - [ ] change the origin point of the projection
 
+**Importance**: Must have
+**Complexity**: high
+
 ### change color settings
 > "As a user, I want to be able to change the fill and outline colors of different features as well as enable a heatmap colloration for features where age are important"
 
@@ -503,6 +651,9 @@ those are options that are not relevant in the actual simulation process but all
 - [ ] modify the fill color of a feature
 - [ ] modify the outline color of a feature
 - [ ] color features based on their age with a heatmap
+
+**Importance**: Should have
+**Complexity**: medium
 
 ### Importing reference
 > “As a user, I want to overlay an equirectangular image on the globe for reference.”
@@ -512,6 +663,9 @@ those are options that are not relevant in the actual simulation process but all
 - Overlay toggles (opacity, visibility).  
 - Aids in aligning features to real or custom maps.
 
+**Importance**: Nice to have
+**Complexity**: medium
+
 ### Final Display Adjustments
 > “As a user, I want to toggle/hide features to produce a clear map.”
 
@@ -519,6 +673,9 @@ those are options that are not relevant in the actual simulation process but all
 - Layers panel for show/hide (continents, orogenies, hotspots, etc.).  
 - Opacity controls.  
 - Option to remove lat/long grid or switch projection.
+
+**Importance**: Should have
+**Complexity**: low
 
 ### Exporting Maps & Timelapse
 > “As a user, I want to export snapshots or timelapses of the planet’s tectonic evolution.”
@@ -528,6 +685,9 @@ those are options that are not relevant in the actual simulation process but all
 - Time-sequence exports (e.g., every 10 My).  
 - Common projections (Equirectangular, Mollweide) or 3D globe.  
 - Preserves layer colors and time-based geometry.
+
+**Importance**: Critical
+**Complexity**: medium high
 
 ---
 
