@@ -198,6 +198,8 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
 
 # Main goals
 
+![Clia_mockup_1](https://github.com/user-attachments/assets/142d2608-ab6e-439a-9657-761a10a104f7)
+
 ---
 
 # Technical Analysis
