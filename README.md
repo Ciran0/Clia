@@ -200,6 +200,37 @@ As GPlates is the most direct equivalent to the Clia project I thought it was a 
 
 ![Clia_mockup_1](https://github.com/user-attachments/assets/142d2608-ab6e-439a-9657-761a10a104f7)
 
+
+
+Constraints :
+justification fabrication locale
+   - const :ne pas maintenir un serveur (couteux)
+   - const :ne pas que le serveur soit un frein 
+   - const :ne pas a se préoccuper de la puissance et du scaling 
+justification web vs application bureau
+   - confort
+   - portabilité
+   - sécurité
+   - mise a jour
+implique : frontend, backend, database
+
+justification rust : better webassembly toolchain, calcul math différent de code admin website
+tout ce vaut, pas de mauvais choix
+regarder + les renderer
+
+regarder qu'est-ce qui fonctionne le mieux avec le renderer comme frontend
+
+pas utile de regénérer le fichier à partir d'une db relationelle => fichier
+
+grosses databases qui stoque bien les données
+--> postgresql pas besoin d'une technologie de db particulière, choix polyvalent
+
+gérer le local storage
+
+ ==> il n'y a rien qui me retient de prendre une solution par défaut
+
+renseignement backend batteries included (rust)
+
 ---
 
 # Technical Analysis
